@@ -1,2 +1,46 @@
-# Python-PEP8-
-Python PEP8 编码规范 https://www.python.org/dev/peps/pep-0008/
+# PEP 8 - Style Guide for Python Code
+
+## Contents
+
+* [Introduction - 简介](#1)
+* [A Foolish Consistency is the Hobgoblin of Little Minds - 愚蠢的一致性是小心灵的大地精](#2)
+* [Code lay-out - 代码布局](#3)
+ * [Indentation - 缩进](#3.1)
+ * [Tabs or Spaces? - 制表符还是空格符?](#3.2)
+ * [Maximum Line Length](#3.3)
+ * [Should a line break before or after a binary operator?](#3.4)
+ * [Blank Lines](#3.5)
+ * [Source File Encoding](#3.6)
+ * [Imports](#3.7)
+ * [Module level dunder names](#3.8)
+* [String Quotes](#4)
+* [Whitespace in Expressions and Statements](#5)
+  * [Pet Peeves](#5.1)
+  * [Other Recommendations](#5.2)
+* [When to use trailing commas](#6)
+* [Comments](#7)
+  * [Block Comments](#7.1)
+  * [Inline Comments](#7.2)
+  * [Documentation Strings](#7.3)
+* [Naming Conventions](#8)
+  * [Overriding Principle](#8.1)
+  * [Descriptive: Naming Styles](#8.2)
+  * [Prescriptive: Naming Conventions](#8.3)
+    * [Names to Avoid](#8.3.1)
+    * [Package and Module Names](#8.3.2)
+    * [Class Names](#8.3.3)
+    * [Type variable names](#8.3.4)
+    * [Exception Names](#8.3.5)
+    * [Global Variable Names](#8.3.6)
+    * [Function Names](#8.3.7)
+    * [Function and method arguments](#8.3.8)
+    * [Method Names and Instance Variables](#8.3.9)
+    * [Constants](#8.3.10)
+    * [Designing for inheritance](#8.3.11)
+  * [Public and internal interfaces](#8.4)
+* [Programming Recommendations](#9)
+  * [Function Annotations](#9.1)
+* [References](#10)
+* [Copyright](#11)
+
+<h4 id="1">简介</h4>

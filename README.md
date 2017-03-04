@@ -52,15 +52,14 @@
 2、遵循此风格后和其他 python 版本不兼容，甚至出现错误。
 <h4 id="3">代码布局</h4>
 <h5 id="3.1">缩进</h5>
-一个缩进级别四个空格。  
-连续行使用两种方式使封装元素成为一行：括号内隐式连接 和 悬挂式缩进
-1、使用大中小括号内的隐式连接
+一个缩进级别四个空格。  
+* 连续行使用两种方式使封装元素成为一行：括号内垂直隐式连接和悬挂式缩进，使用悬挂式缩进应该注意第一行不应该有参数，连续行要使用进一步的缩进来区分。
 ```Python
-# 垂直对齐，用开放定界符使成一行
+# 垂直隐式连接对齐，用开放定界符使成一行
 foo = func_name(var_one, var_two,
                 var_three, var_four)
                 
-# 函数定义时需要再加一级缩进区分非参数代码行
+# 悬挂式缩进，函数定义时需要再加一级缩进区分非参数代码行
 def long_function_name(
         var_one, var_two, var_three,
         var_four):
@@ -71,3 +70,47 @@ foo = long_function_name(
     var_one, var_two,
     var_three, var_four)
 ```
+* 当 if 语句过长需要换行时，以下处理方法可以采用。
+```Python
+# 没有额外的缩进
+if (this_is_one_thing and
+    that_is_another_thing):
+    do_something()
+
+# 增加注释，用以区分函数体部分
+# 支持语法高亮
+if (this_is_one_thing and
+    that_is_another_thing):
+    # Since both conditions are true, we can frobnicate.
+    do_something()
+
+# 连续行使用进一步的缩进和其他函数体区分
+if (this_is_one_thing
+        and that_is_another_thing):
+    do_something()
+```
+* 当闭环括号内元素跨行时，可以采用以下方式
+```Python
+my_list = [
+    1, 2, 3,
+    4, 5, 6,
+    ]
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+    )
+```
+<h5 id="3.2">Tabs or Spaces?</h5>
+除非项目中已经约定了使用 tab 作为缩进，最好使用 space。  
+Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Python 2 代码应该被转换为仅使用 space。  
+<h5 id="3.3">代码行最大长度</h5>
+将所有行限制为最多79个字符。  
+对于具有较少结构限制（文档字符串或注释）的长文本块，行长度应限制为72个字符。  
+当然了，不要问为啥非得是 79,72。背后也许有一个很是凄惨的故事。
+反斜杠有时可能仍然要用。 例如，又多又长的 with - 语句不能使用隐式连接，这时反斜杠是可以接受的：
+```Python
+with open('/path/to/some/file/you/want/to/read') as file_1, \
+     open('/path/to/some/file/being/written', 'w') as file_2:
+    file_2.write(file_1.read())
+```
+assert 语句也是如此。

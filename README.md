@@ -123,15 +123,15 @@ income = (gross_wages
           + (dividends - qualified_dividends)
           - ira_deduction
           - student_loan_interest)
-```
-只要保持本地一致性，在二元运算符之前和之后断开都是允许的，但是新的 Python 代码推荐使用 Knuth 形式。
+```  
+只要保持本地一致性，在二元运算符之前和之后断开都是允许的，但是新的 Python 代码推荐使用 Knuth 形式。  
 <h5 id="3.5">空行</h5>
 顶层函数和类定义使用两个空行。  
-类内方法定义使用一个空行。  
-不同函数组之间使用额外的空行隔离。  
-总之，空行的作用就是隔离不同函数类等，层次分明。
- <h5 id="3.6">源文件编码</h5>
-Python 2 默认ASCII，Python 3 默认UTF-8。  
-使用 ASCII 的 Python 2 源文件或使用 UTF-8 的 Python 3 源文件不应该有编码声明。  
-源文件最好只使用 ASCII 字符，即使是蹩脚的 Chinglish 亦可，家和万事兴。
+类内方法定义使用一个空行。  
+不同函数组之间使用额外的空行隔离。  
+总之，空行的作用就是隔离不同函数类等，层次分明。  
+<h5 id="3.6">源文件编码</h5>
+Python 2 默认ASCII，Python 3 默认UTF-8。  
+使用 ASCII 的 Python 2 源文件或使用 UTF-8 的 Python 3 源文件不应该有编码声明。  
+源文件最好只使用 ASCII 字符，即使是蹩脚的 Chinglish 亦可，家和万事兴。  
  

@@ -106,7 +106,7 @@ Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Pyth
 <h5 id="3.3">代码行最大长度</h5>
 将所有行限制为最多79个字符。  
 对于具有较少结构限制（文档字符串或注释）的长文本块，行长度应限制为72个字符。  
-当然了，不要问为啥非得是 79,72。背后也许有一个很是凄惨的故事。
+当然了，不要问为啥非得是 79,72。我们要兼顾非洲大陆人民的生活。代码是全世界的。  
 反斜杠有时可能仍然要用。 例如，又多又长的 with - 语句不能使用隐式连接，这时反斜杠是可以接受的：
 ```Python
 with open('/path/to/some/file/you/want/to/read') as file_1, \
@@ -114,3 +114,24 @@ with open('/path/to/some/file/you/want/to/read') as file_1, \
     file_2.write(file_1.read())
 ```
 assert 语句也是如此。
+<h5 id="3.4">在二元运算符之前还是之后断行?</h5>
+算法和程序设计技术先驱，计算机排版系统 TEX 和 METAFONT 的发明者 Donald Knuth，推荐使用以下形式：  
+```Python
+# Yes: easy to match operators with operands
+income = (gross_wages
+          + taxable_interest
+          + (dividends - qualified_dividends)
+          - ira_deduction
+          - student_loan_interest)
+```
+只要保持本地一致性，在二元运算符之前和之后断开都是允许的，但是新的 Python 代码推荐使用 Knuth 形式。
+<h5 id="3.5">空行</h5>
+顶层函数和类定义使用两个空行。  
+类内方法定义使用一个空行。  
+不同函数组之间使用额外的空行隔离。  
+总之，空行的作用就是隔离不同函数类等，层次分明。
+ <h5 id="3.6">源文件编码</h5>
+Python 2 默认ASCII，Python 3 默认UTF-8。  
+使用 ASCII 的 Python 2 源文件或使用 UTF-8 的 Python 3 源文件不应该有编码声明。  
+源文件最好只使用 ASCII 字符，即使是蹩脚的 Chinglish 亦可，家和万事兴。
+ 

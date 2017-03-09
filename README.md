@@ -55,36 +55,36 @@
 一个缩进级别四个空格。  
 * 连续行使用两种方式使封装元素成为一行：括号内垂直隐式连接和悬挂式缩进，使用悬挂式缩进应该注意第一行不应该有参数，连续行要使用进一步的缩进来区分。
 ```Python
-# 垂直隐式连接对齐，用开放定界符使成一行
-foo = func_name(var_one, var_two,
-                var_three, var_four)
-                
-# 悬挂式缩进，函数定义时需要再加一级缩进区分非参数代码行
+# Aligned with opening delimiter.
+foo = long_function_name(var_one, var_two,
+                         var_three, var_four)
+
+# More indentation included to distinguish this from the rest.
 def long_function_name(
         var_one, var_two, var_three,
         var_four):
     print(var_one)
-    
-# 函数调用时悬挂式一级缩进
+
+# Hanging indents should add a level.
 foo = long_function_name(
     var_one, var_two,
     var_three, var_four)
 ```
 * 当 if 语句过长需要换行时，以下处理方法可以采用。
 ```Python
-# 没有额外的缩进
+# No extra indentation.
 if (this_is_one_thing and
     that_is_another_thing):
     do_something()
 
-# 增加注释，用以区分函数体部分
-# 支持语法高亮
+# Add a comment, which will provide some distinction in editors
+# supporting syntax highlighting.
 if (this_is_one_thing and
     that_is_another_thing):
     # Since both conditions are true, we can frobnicate.
     do_something()
 
-# 连续行使用进一步的缩进和其他函数体区分
+# Add some extra indentation on the conditional continuation line.
 if (this_is_one_thing
         and that_is_another_thing):
     do_something()
@@ -134,4 +134,65 @@ income = (gross_wages
 Python 2 默认ASCII，Python 3 默认UTF-8。  
 使用 ASCII 的 Python 2 源文件或使用 UTF-8 的 Python 3 源文件不应该有编码声明。  
 源文件最好只使用 ASCII 字符，即使是蹩脚的 Chinglish 亦可，家和万事兴。  
- 
+
+<h5 id="3.7">模块导入</h5>
+```Python
+YES: from subprocess import Popen, PIPE
+     import os
+     import sys
+
+NO:  import sys, os
+```
+模块导入总是位于文件顶部，在模块注释和文档字符串之后，模块全局变量和常量之前  
+导入应该按照以下顺序分组，不同组间用空行隔离  
+* 标准库 imports  
+* 相关第三方 imports  
+* 本地特定应用／库 imports  
+推荐使用绝对导入，标准库代码应总是使用绝对导入  
+```Python
+import mypkg.sibling
+from mypkg import sibling
+from mypkg.sibling import example
+```
+在包结构比较复杂时，可以使用相对导入  
+```Python
+from . import sibling
+from .sibling import example
+```
+在 Python 3 中，相对导入已经被删除，禁止使用  
+类导入
+```Python
+from myclass import MyClass
+from foo.bar.yourclass import YourClass
+```
+如果这种方式导致了本地命名冲突，可以使用以下方式
+```Python
+import myclass
+import foo.bar.yourclass
+```
+然后使用 myclass.MyClass 和 foo.bar.yourclass.YourClass  
+请不要使用以下方式  
+```Python
+from <module> import *
+```
+<h5 id="3.8">模块级别 dunder 名称</h5>
+模块级别 “dunders”（即具有两个前导和两个后缀下划线的名称），例如 \_\_all\_\_，\_\_author\_\_，\_\_version\_\_ 等应放在模块 docstring 之后，但在任何 import 语句之前，但是除了 \_\_future\_\_ 导入。 Python 强制 future-imports 必须在除了 docstrings 之外的任何其他代码之前出现在模块中。  
+例如：
+```Python
+"""This is the example module.
+
+This module does stuff.
+"""
+
+from __future__ import barry_as_FLUFL
+
+__all__ = ['a', 'b', 'c']
+__version__ = '0.1'
+__author__ = 'Cardinal Biggles'
+
+import os
+import sys
+```
+<h5 id="4">字符串引号</h5>
+在 Python 中，单引号和双引号是等价的，只需要坚持使用一种并保持一致即可。  
+在双引号中使用单引号，单引号中使用双引号。三引号中使用双引号。

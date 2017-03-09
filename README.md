@@ -1,4 +1,3 @@
-# PEP 8 - Style Guide for Python Code
 # PEP 8 - Python 代码风格指南
 ## Contents
 
@@ -89,7 +88,7 @@ if (this_is_one_thing
         and that_is_another_thing):
     do_something()
 ```
-* 当闭环括号内元素跨行时，可以采用以下方式
+* 当闭环括号内元素跨行时，可以采用以下方式。
 ```Python
 my_list = [
     1, 2, 3,
@@ -100,7 +99,7 @@ result = some_function_that_takes_arguments(
     'd', 'e', 'f',
     )
 ```
-<h5 id="3.2">Tabs or Spaces?</h5>
+<h5 id="3.2">A罩杯还是C罩杯?</h5>
 除非项目中已经约定了使用 tab 作为缩进，最好使用 space。  
 Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Python 2 代码应该被转换为仅使用 space。  
 <h5 id="3.3">代码行最大长度</h5>
@@ -143,35 +142,35 @@ YES: from subprocess import Popen, PIPE
 
 NO:  import sys, os
 ```
-模块导入总是位于文件顶部，在模块注释和文档字符串之后，模块全局变量和常量之前  
-导入应该按照以下顺序分组，不同组间用空行隔离  
+模块导入总是位于文件顶部，在模块注释和文档字符串之后，模块全局变量和常量之前。  
+导入应该按照以下顺序分组，不同组间用空行隔离。  
 * 标准库 imports  
 * 相关第三方 imports  
 * 本地特定应用／库 imports  
-推荐使用绝对导入，标准库代码应总是使用绝对导入  
+推荐使用绝对导入，标准库代码应总是使用绝对导入。  
 ```Python
 import mypkg.sibling
 from mypkg import sibling
 from mypkg.sibling import example
 ```
-在包结构比较复杂时，可以使用相对导入  
+在包结构比较复杂时，可以使用相对导入。  
 ```Python
 from . import sibling
 from .sibling import example
 ```
-在 Python 3 中，相对导入已经被删除，禁止使用  
-类导入
+在 Python 3 中，相对导入已经被删除，禁止使用。  
+类导入：
 ```Python
 from myclass import MyClass
 from foo.bar.yourclass import YourClass
 ```
-如果这种方式导致了本地命名冲突，可以使用以下方式
+如果这种方式导致了本地命名冲突，可以使用以下方式：
 ```Python
 import myclass
 import foo.bar.yourclass
 ```
-然后使用 myclass.MyClass 和 foo.bar.yourclass.YourClass  
-请不要使用以下方式  
+然后使用 myclass.MyClass 和 foo.bar.yourclass.YourClass。  
+请不要使用以下方式：
 ```Python
 from <module> import *
 ```

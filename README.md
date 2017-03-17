@@ -291,4 +291,104 @@ long_variable = 3
 ```
 
 <h5 id="5.2">其他建议</h5>
+在任何地方避免使用尾随空格。
+
+在二元运算符周围使用空格：
+
+```python
+Yes:
+
+i = i + 1
+submitted += 1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
+
+No:
+
+i=i+1
+submitted +=1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
+```
+表示关键字参数货默认参数值时，不要使用空格：
+
+```python
+Yes:
+
+def complex(real, imag=0.0):
+    return magic(r=real, i=imag)
+No:
+
+def complex(real, imag = 0.0):
+    return magic(r = real, i = imag)
+```
+函数注释的场景：
+
+```python
+Yes:
+
+def munge(input: AnyStr): ...
+def munge() -> AnyStr: ...
+
+No:
+
+def munge(input:AnyStr): ...
+def munge()->PosInt: ...
+```
+
+当参数注释和默认值共存时：
+
+```python
+Yes:
+
+def munge(sep: AnyStr = None): ...
+def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
+
+No:
+
+def munge(input: AnyStr=None): ...
+def munge(input: AnyStr, limit = 1000): ...
+```
+
+复合声明不建议使用：
+
+```python
+Yes:
+
+if foo == 'blah':
+    do_blah_thing()
+do_one()
+do_two()
+do_three()
+
+Rather not:
+
+if foo == 'blah': do_blah_thing()
+do_one(); do_two(); do_three()
+```
+
+下面这种丑就不多说了：
+
+```python
+Rather not:
+
+if foo == 'blah': do_blah_thing()
+for x in lst: total += x
+while t < 10: t = delay()
+
+Definitely not:
+
+if foo == 'blah': do_blah_thing()
+else: do_non_blah_thing()
+
+try: something()
+finally: cleanup()
+
+do_one(); do_two(); do_three(long, argument,
+                             list, like, this)
+
+if foo == 'blah': one(); two(); three()
+```
 

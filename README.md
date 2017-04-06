@@ -23,24 +23,22 @@
     * [Documentation Strings - 文档字符串](#7.3)
 * [Naming Conventions - 命名约定](#8)
     * [Overriding Principle - 圣经戒律](#8.1)
-    * [Descriptive: Naming Styles - 描述的: 命名样式](#8.2)
+    * [Descriptive: Naming Styles - 描述的: 命名风格](#8.2)
     * [Prescriptive: Naming Conventions - 规定的: 命名规定](#8.3)
         * [Names to Avoid - 避免的命名](#8.3.1)
-        * [Package and Module Names - 包和模块名](#8.3.2)
+        * [Package and Module Names - 包和模块命名](#8.3.2)
         * [Class Names - 类名](#8.3.3)
         * [Type variable names - 类型变量名](#8.3.4)
-        * [Exception Names - 异常名](#8.3.5)
-        * [Global Variable Names - 全局变量名](#8.3.6)
-        * [Function Names - 函数名](#8.3.7)
+        * [Exception Names - 异常的命名](#8.3.5)
+        * [Global Variable Names - 全局变量命名](#8.3.6)
+        * [Function Names - 函数命名](#8.3.7)
         * [Function and method arguments - 函数和方法参数](#8.3.8)
         * [Method Names and Instance Variables - 方法名和实例变量](#8.3.9)
         * [Constants - 常量](#8.3.10)
-        * [Designing for inheritance - 继承的设计](#8.3.11)
+        * [Designing for inheritance - 继承设计](#8.3.11)
         * [Public and internal interfaces - 公共和内部接口](#8.4)
 * [Programming Recommendations - 编码建议](#9)
      * [Function Annotations - 函数注释](#9.1)
-* [References - 参考文献](#10)
-* [Copyright - 版权](#11)
 
 <h4 id="1">简介</h4>
 许多工程项目都有自己独有的编码风格指南。如果发生任何规则冲突，当然是与项目级别的代码风格保持一致。美其名曰：入乡随俗，Do what Romans do in Rome，到了罗马就跟着吃马肉，生在唐朝就吃胖点。
@@ -391,4 +389,359 @@ do_one(); do_two(); do_three(long, argument,
 
 if foo == 'blah': one(); two(); three()
 ```
+<h4 id="6">何时使用逗号结尾</h4>
 
+单元素元组强制使用逗号：
+
+```python
+Yes:
+
+FILES = ('setup.cfg',)
+
+OK, but confusing:
+
+FILES = 'setup.cfg',
+```
+当使用版本控制系统时，一组希望后续扩展的值/参数/改善的条目使用以下形式：
+```python
+Yes:
+
+FILES = [
+    'setup.cfg',
+    'tox.ini',
+    ]
+initialize(FILES,
+           error=True,
+           )
+No:
+
+FILES = ['setup.cfg', 'tox.ini',]
+initialize(FILES, error=True,)
+```
+
+<h4 id="7">注释</h4>
+
+糟糕的注释不如没有注释，一定要用 English 注释。
+
+<h5 id="7.1">块注释</h5>
+
+同等级别的一块代码的注释，块注释内每行注释以 \# 开头，内部注释段落之间使用以 \# 开头的空行注释隔开。
+
+<h5 id="7.2">行注释</h5>
+
+行注释和代码声明间至少间隔两个空格，不要使用无聊的行注释，例如：
+
+```python 
+Don't do this:
+
+x = x + 1                 # Increment x
+
+But sometimes, this is useful:
+
+x = x + 1                 # Compensate for border
+```
+
+<h5 id="7.3">文档字符串</h5>
+
+为所有公共模块，函数，类和方法编写文档字符串。 对于非公共方法，文本字符串不是必需的，但应该有一个描述该方法的注释。  
+e.g.  
+```python
+"""Return a foobang
+
+Optional plotz says to frobnicate the bizbaz first.
+"""
+```
+
+<h4 id="8">命名约定</h4>
+<h5 id="8.1">圣经戒律</h5>
+
+对用户可见的公共 API 部分的命名应该遵从反应如何使用而不是怎么实现。
+
+<h5 id="8.2">描述的: 命名风格</h5>
+
+以下命名风格通常区分彼此使用：
+
+* b (单个小写字母)
+
+* B (单个大写字母)
+
+* lowercase（小写）
+
+* lower\_case\_with_underscores（带下划线的小写）
+
+* UPPERCASE（大写）
+
+* UPPER\_CASE\_WITH\_UNDERSCORES（带下划线的大写）
+
+* CapitalizedWords（驼峰式，蒙古包式 whatever.）
+
+<blockquote>Note: 使用驼峰式时，缩写全部大写，例如：HTTPServerError 好于 HttpServerError </blockquote>
+
+* mixedCase (乌鬼头，寡人比喻的，形象不)
+
+* Capitalized_Words_With_Underscores (丑！不解释！)
+
+* \_single\_leading\_underscore : weak "internal use" indicator. E.g. from M import * 不会导入下划线开头的对象
+
+* single\_trailing\_underscore\_ : 用来避免和 python 关键字冲突, e.g:
+```python
+Tkinter.Toplevel(master, class_='ClassName')
+```
+* \_\_double\_leading_underscore : 当对类属性命名时, 调用名改变 (在 FooBar 类内, \_\_boo 变成了 \_FooBar\_\_boo ; see bellow)
+
+* \_\_double\_leading\_and\_trailing\_underscore\_\_ : "魔幻的" 对象或属性，只生存于用户控制的命名空间。E.g. \_\_init\_\_ , \_\_import\_\_ 或 \_\_file\_\_ . 千万不要臆造这种命名; 只在文档中使用。
+
+<h5 id="8.3">规定的: 命名规定</h5>
+
+<h6 id="8.3.1">避免的命名</h6>
+
+一定不要使用 l O I 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
+
+<h6 id="8.3.2">包和模块命名</h6>
+
+模块应该使用简短并且全小写的命名，下划线也可以使用以提升可读性。
+
+Python 包也应该使用简短的全小写名称，尽管不鼓励使用下划线。
+
+当 C/C++ 编写的扩展模块伴随一个提供更高级别接口的 python 模块时，C/C++ 模块命名应该以下划线开头（e.g. \_socket）
+
+<h6 id="8.3.3">类名</h6>
+
+类名通常使用驼峰式命名习惯，在有了接口文档说明并且主要用于调用的情况下，类名也可以使用函数命名风格
+
+Note that there is a separate convention for builtin names: most builtin names are single words (or two words run together), with the CapWords convention used only for exception names and builtin constants.
+
+<h6 id="8.3.4">类型变量名</h6>
+
+Names of type variables introduced in PEP 484 should normally use CapWords preferring short names: T , AnyStr , Num . It is recommended to add suffixes _co or _contra to the variables used to declare covariant or contravariant behavior correspondingly. Examples:
+
+```python
+from typing import TypeVar
+
+VT_co = TypeVar('VT_co', covariant=True)
+KT_contra = TypeVar('KT_contra', contravariant=True)
+```
+
+<h6 id="8.3.5">异常名</h6>
+
+异常应该是类，所以可以使用类命名习惯，但是，如果异常是个错误类，一般加上 "Error" 后缀
+
+<h6 id="8.3.6">全局变量名</h6>
+
+我们假设这些全局变量只在一个模块内使用，这样的话和函数的命名习惯是一样的。
+
+设计为通过 <code>from M import *</code> 导入的类应该使用 __all__ 机制避免导出全局变量，或者可以使用老式的习惯，给这些全局变量名加上下划线作为前缀（表示这时非公有变量）
+
+
+<h6 id="8.3.6">函数名</h6>
+
+e.g, <code>func</code> or <code>func_write_to_file</code>
+
+为了向后兼容性，也可以使用 mixedCase 式命名风格。
+
+
+<h6 id="8.3.7">函数和方法参数</h6>
+
+实例方法第一个入参一定要是 self
+
+类方法第一个入参一定要是 cls
+
+如果函数入参名和保留关键字冲突，则后缀下划线好过缩写或者糟糕的拼写
+
+e.g, class_ 好过 clss
+
+<h6 id="8.3.8">方法名和实例变量</h6>
+
+使用函数命名风格即可。如果希望是私有方法或实例变量，则前缀下划线。
+
+为避免和子类的命名冲突，请使用双下划线前缀命名。
+
+如果类 Foo 有一个属性变量 __a，那么通过 Foo.__a 是不能访问的。（当然，固执的用户仍然可以通过 Foo._Foo__a 访问），一般来说，双下划线前缀只是在避免子类属性命名冲突的场景下使用。
+
+<h6 id="8.3.9">常量</h6>
+
+常量一般定义在模块级别。命名风格如：MAX_OVERFLOW 或 TOTAL 。
+
+<h6 id="8.3.10">继承设计</h6>
+
+经常去思考类方法和实例变量（属性）应该是公有的还是非公有的（严格意义上，python 没有私有变量）。如果不确定，那就设置成非公有的。
+
+另一类属性类别是子类 API 的一部分，（在其他语言中称"protected"）。有些类天生就是被设计为用来继承的，当设计这种类时，注意哪些属性是公有的，哪些是子类 API 的一部分，哪些是只在基类中使用的。
+
+神谕的指导：
+
+* 公有实例变量不应该有前缀下划线
+* 公有实例变量和保留关键字冲突时，变量名加前缀下划线避免，这比使用缩写和其他糟糕的拼写要好（除了 'cls'，当一个变量或入参确定是一个类，特别是作为类方法的第一个入参时，'cls' 更惹人喜爱）。
+* 对于简单的公有数据属性，不要使用复杂的存取函数，直接暴露属性名。
+* 如果设计继承基类时，不希望子类访问的属性加双下划线前缀。
+
+<h6 id="8.3.11">公共和内部接口</h6>
+
+文档说明的接口一般认为是公共接口，除非文档明确声明为临时或内部接口（为了兼容性等其他原因），所有非文档说明的接口一般为内部接口。
+
+模块应该使用 __all__ 属性明确声明公共 API 名，如果 __all__ 为空，则表明模块没有公共 API。
+
+尽管使用了 __all__ 属性，内部接口（packages, modules, classes, functions, attributes or other names）仍然需要使用前缀下划线。
+
+如果包含的任何一个命名空间（package, module or class）是内部的，那么这个接口也被认为是内部接口。
+
+Imported names should always be considered an implementation detail. Other modules must not rely on indirect access to such imported names unless they are an explicitly documented part of the containing module's API, such as os.path or a package's __init__ module that exposes functionality from submodules.
+
+<h3 id="9">编码建议</h3>
+
+* 代码不应该以一种不利于其他 python 实现（PyPy, Jython, IronPython, Cython, Psyco 诸如此类）的方式编写。 例如：不要使用 a += b 或 a = a + b 来实现就地字符串连接，在库的性能敏感部分，应该使用 ''.join() 的形式，这就能保证在不同的 python 实现中，连接动作可以在线性时间内完成。
+
+* 和例如 None 这类 singleton 的比较，应该使用 is 或 is not 而不是等号符。另外，小心使用 if x 如果你的本意是 if x is not None，如果 x 是个布尔变量值 false，就完蛋了。
+
+* 尽管功能相同，从可读性上考虑：
+```python
+Yes:
+
+if foo is not None:
+
+No:
+
+if not foo is None:
+```
+
+* When implementing ordering operations with rich comparisons, it is best to implement all six operations ( __eq__ , __ne__ , __lt__ , __le__ , __gt__ , __ge__ ) rather than relying on other code to only exercise a particular comparison.
+
+* 使用 def 语句而不是赋值语句直接绑定一个 lambda 表达式到标志符上：
+```python
+Yes:
+
+def f(x): return 2*x
+
+No:
+
+f = lambda x: 2*x
+```
+The use of the assignment statement eliminates the sole benefit a lambda expression can offer over an explicit def statement (i.e. that it can be embedded inside a larger expression
+
+* 捕获的异常要说明 "错误出在哪里了? " 而不是仅仅说明 "出问题了"
+
+* 异常转移时，要讲详细的异常信息保留到新的异常中（Python 2: "raise X" Python 3: "raise X from Y"）
+
+* 当在 Python 2 中抛出异常时，使用<code>raise ValueError('message')</code>而不是<code>raise ValueError, 'message'</code>，这样可以避免行连续符的使用
+
+* 当捕获异常时，尽可能提及具体的异常而不是使用一个裸露的 except 子句，e.g：
+```python
+try:
+    import platform_specific_module
+except ImportError:
+    platform_specific_module = None
+```
+
+* 当对捕获的异常重命名时，使用以下语法：
+```python
+try:
+    process_data()
+except Exception as exc:
+    raise DataProcessingFailedError(str(exc))
+```
+
+* 当捕获操作系统错误时，使用 Python 3.3 中介绍的异常层次结构
+
+* 对于所有的 try/except 子句，将 try 子句限制为必需的绝对最小代码量避免隐藏错误
+```python
+Yes:
+
+try:
+    value = collection[key]
+except KeyError:
+    return key_not_found(key)
+else:
+    return handle_value(value)
+
+No:
+
+try:
+    # Too broad!
+    return handle_value(collection[key])
+except KeyError:
+    # Will also catch KeyError raised by handle_value()
+    return key_not_found(key)
+```
+
+* 特定代码块的本地资源使用 with 语句确保使用后立即释放，try/finally 也可以
+
+* 除了申请和释放资源，任何时候都应该使用单独的函数和方法调用 Context managers，e.g：
+```python
+Yes:
+
+with conn.begin_transaction():
+    do_stuff_in_transaction(conn)
+
+No:
+
+with conn:
+    do_stuff_in_transaction(conn) 
+```
+
+* 返回值要一致，be consistent：
+```
+Yes:
+
+def foo(x):
+    if x >= 0:
+        return math.sqrt(x)
+    else:
+        return None
+
+def bar(x):
+    if x < 0:
+        return None
+    return math.sqrt(x)
+
+No:
+
+def foo(x):
+    if x >= 0:
+        return math.sqrt(x)
+
+def bar(x):
+    if x < 0:
+        return
+    return math.sqrt(x)
+```
+
+* 使用 string 方法而不是 string 模块。it's faster。当然，除了 2.0 版本之前 python 代码的向后兼容性
+
+* 使用 ''.startswith() 和 ''.endswith() 而不是字符串切片来检查前缀或后缀，e.g：
+```python
+Yes: if foo.startswith('bar'):
+No:  if foo[:3] == 'bar':
+```
+
+* 对象类型比较因该使用isinstance() 而不是直接比较，e.g：
+```python
+Yes: if isinstance(obj, int):
+
+No:  if type(obj) is type(1):
+```
+在 Python 2 中，string 和 unicode 公共基类是 basestring，因此：
+```python
+if isinstance(obj, basestring):
+```
+
+* 对于序列（字符串，列表，元组），空的序列是 false：
+```python
+Yes: if not seq:
+     if seq:
+
+No: if len(seq):
+    if not len(seq):
+```
+
+* 不要使用尾随空格
+
+* 不要使用 == 比较布尔值：
+```python
+Yes:   if greeting:
+No:    if greeting == True:
+Worse: if greeting is True:
+```
+
+<h4 id="9.1">函数注释</h4>
+
+个人建议：和项目注释风格保持一致。赏心悦目，纷吾既有此内美兮，又重之以修能，即可。

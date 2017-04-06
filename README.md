@@ -136,7 +136,7 @@ assert 语句也是如此。
 算法和程序设计技术先驱，计算机排版系统 TEX 和 METAFONT 的发明者 Donald Knuth，推荐使用以下形式：
 
 ```Python
-# Yes: easy to match operators with operands
+# 是： easy to match operators with operands
 income = (gross_wages
           + taxable_interest
           + (dividends - qualified_dividends)
@@ -165,11 +165,11 @@ Python 2 默认ASCII，Python 3 默认UTF-8。
 <h3 id="3.7">模块导入</h3>
 
 ```Python
-YES: from subprocess import Popen, PIPE
+是： from subprocess import Popen, PIPE
      import os
      import sys
 
-NO:  import sys, os
+否： import sys, os
 ```
 
 模块导入总是位于文件顶部，在模块注释和文档字符串之后，模块全局变量和常量之前。
@@ -248,40 +248,40 @@ import sys
 在以下场景避免不必要的空格
 
 ```Python
-Yes: spam(ham[1], {eggs: 2})
-No:  spam( ham[ 1 ], { eggs: 2 } )
+是： spam(ham[1], {eggs: 2})
+否： spam( ham[ 1 ], { eggs: 2 } )
 
-Yes: foo = (0,)
-No:  bar = (0, )
+是： foo = (0,)
+否： bar = (0, )
 
-Yes: if x == 4: print x, y; x, y = y, x
-No:  if x == 4 : print x , y ; x , y = y , x
+是： if x == 4: print x, y; x, y = y, x
+否： if x == 4 : print x , y ; x , y = y , x
 
-Yes:
+是：
 ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
 ham[lower:upper], ham[lower:upper:], ham[lower::step]
 ham[lower+offset : upper+offset]
 ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
 ham[lower + offset : upper + offset]
 
-No:
+否：
 ham[lower + offset:upper + offset]
 ham[1: 9], ham[1 :9], ham[1:9 :3]
 ham[lower : : upper]
 ham[ : upper]
 
-Yes: spam(1)
-No:  spam (1)
+是： spam(1)
+否： spam (1)
 
-Yes: dct['key'] = lst[index]
-No:  dct ['key'] = lst [index]
+是： dct['key'] = lst[index]
+否： dct ['key'] = lst [index]
 
-Yes:
+是：
 x = 1
 y = 2
 long_variable = 3
 
-No:
+否：
 x             = 1
 y             = 2
 long_variable = 3
@@ -294,7 +294,7 @@ long_variable = 3
 在二元运算符周围使用空格：
 
 ```python
-Yes:
+是：
 
 i = i + 1
 submitted += 1
@@ -302,7 +302,7 @@ x = x*2 - 1
 hypot2 = x*x + y*y
 c = (a+b) * (a-b)
 
-No:
+否：
 
 i=i+1
 submitted +=1
@@ -313,11 +313,11 @@ c = (a + b) * (a - b)
 表示关键字参数货默认参数值时，不要使用空格：
 
 ```python
-Yes:
+是：
 
 def complex(real, imag=0.0):
     return magic(r=real, i=imag)
-No:
+否：
 
 def complex(real, imag = 0.0):
     return magic(r = real, i = imag)
@@ -325,12 +325,12 @@ def complex(real, imag = 0.0):
 函数注释的场景：
 
 ```python
-Yes:
+是：
 
 def munge(input: AnyStr): ...
 def munge() -> AnyStr: ...
 
-No:
+否：
 
 def munge(input:AnyStr): ...
 def munge()->PosInt: ...
@@ -339,12 +339,12 @@ def munge()->PosInt: ...
 当参数注释和默认值共存时：
 
 ```python
-Yes:
+是：
 
 def munge(sep: AnyStr = None): ...
 def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
 
-No:
+否：
 
 def munge(input: AnyStr=None): ...
 def munge(input: AnyStr, limit = 1000): ...
@@ -353,7 +353,7 @@ def munge(input: AnyStr, limit = 1000): ...
 复合声明不建议使用：
 
 ```python
-Yes:
+是：
 
 if foo == 'blah':
     do_blah_thing()
@@ -394,7 +394,7 @@ if foo == 'blah': one(); two(); three()
 单元素元组强制使用逗号：
 
 ```python
-Yes:
+是：
 
 FILES = ('setup.cfg',)
 
@@ -404,7 +404,7 @@ FILES = 'setup.cfg',
 ```
 当使用版本控制系统时，一组希望后续扩展的值/参数/改善的条目使用以下形式：
 ```python
-Yes:
+是：
 
 FILES = [
     'setup.cfg',
@@ -413,7 +413,7 @@ FILES = [
 initialize(FILES,
            error=True,
            )
-No:
+否：
 
 FILES = ['setup.cfg', 'tox.ini',]
 initialize(FILES, error=True,)
@@ -595,11 +595,11 @@ Imported names should always be considered an implementation detail. Other modul
 
 * 尽管功能相同，从可读性上考虑：
 ```python
-Yes:
+是：
 
 if foo is not None:
 
-No:
+否：
 
 if not foo is None:
 ```
@@ -608,11 +608,11 @@ if not foo is None:
 
 * 使用 def 语句而不是赋值语句直接绑定一个 lambda 表达式到标志符上：
 ```python
-Yes:
+是：
 
 def f(x): return 2*x
 
-No:
+否：
 
 f = lambda x: 2*x
 ```
@@ -644,7 +644,7 @@ except Exception as exc:
 
 * 对于所有的 try/except 子句，将 try 子句限制为必需的绝对最小代码量避免隐藏错误
 ```python
-Yes:
+是：
 
 try:
     value = collection[key]
@@ -653,7 +653,7 @@ except KeyError:
 else:
     return handle_value(value)
 
-No:
+否：
 
 try:
     # Too broad!
@@ -667,12 +667,12 @@ except KeyError:
 
 * 除了申请和释放资源，任何时候都应该使用单独的函数和方法调用 Context managers，e.g：
 ```python
-Yes:
+是：
 
 with conn.begin_transaction():
     do_stuff_in_transaction(conn)
 
-No:
+否：
 
 with conn:
     do_stuff_in_transaction(conn) 
@@ -680,7 +680,7 @@ with conn:
 
 * 返回值要一致，be consistent：
 ```
-Yes:
+是：
 
 def foo(x):
     if x >= 0:
@@ -693,7 +693,7 @@ def bar(x):
         return None
     return math.sqrt(x)
 
-No:
+否：
 
 def foo(x):
     if x >= 0:
@@ -709,15 +709,15 @@ def bar(x):
 
 * 使用 ''.startswith() 和 ''.endswith() 而不是字符串切片来检查前缀或后缀，e.g：
 ```python
-Yes: if foo.startswith('bar'):
-No:  if foo[:3] == 'bar':
+是： if foo.startswith('bar'):
+否： if foo[:3] == 'bar':
 ```
 
 * 对象类型比较因该使用isinstance() 而不是直接比较，e.g：
 ```python
-Yes: if isinstance(obj, int):
+是： if isinstance(obj, int):
 
-No:  if type(obj) is type(1):
+否： if type(obj) is type(1):
 ```
 在 Python 2 中，string 和 unicode 公共基类是 basestring，因此：
 ```python
@@ -726,10 +726,10 @@ if isinstance(obj, basestring):
 
 * 对于序列（字符串，列表，元组），空的序列是 false：
 ```python
-Yes: if not seq:
-     if seq:
+是：if not seq:
+    if seq:
 
-No: if len(seq):
+否：if len(seq):
     if not len(seq):
 ```
 
@@ -737,9 +737,9 @@ No: if len(seq):
 
 * 不要使用 == 比较布尔值：
 ```python
-Yes:   if greeting:
-No:    if greeting == True:
-Worse: if greeting is True:
+是：   if greeting:
+否：   if greeting == True:
+糟糕: if greeting is True:
 ```
 
 <h2 id="9.1">函数注释</h2>

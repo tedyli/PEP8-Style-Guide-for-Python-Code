@@ -40,10 +40,10 @@
 * [Programming Recommendations - 编码建议](#9)
      * [Function Annotations - 函数注释](#9.1)
 
-<h4 id="1">简介</h4>
+<h2 id="1">简介<h2>
 许多工程项目都有自己独有的编码风格指南。如果发生任何规则冲突，当然是与项目级别的代码风格保持一致。美其名曰：入乡随俗，Do what Romans do in Rome，到了罗马就跟着吃马肉，生在唐朝就吃胖点。
 
-<h4 id="2">愚蠢的一致性是小心灵的大地精</h4>
+<h2 id="2">愚蠢的一致性是小心灵的大地精<h2>
 代码风格一致性当然重要，毕竟读起来跟做spa一样爽，但有时也要有自己的判断，不要跟个傻X一样，明明是个90后，非得穿丝袜。
 
 例如以下场景：
@@ -52,9 +52,9 @@
 
 2、遵循此风格后和其他 python 版本不兼容，甚至出现错误。
 
-<h4 id="3">代码布局</h4>
+<h2 id="3">代码布局<h2>
 
-<h5 id="3.1">缩进</h5>
+<h3 id="3.1">缩进</h3>
 一个缩进级别四个空格。
 
 * 连续行使用两种方式使封装元素成为一行：括号内垂直隐式连接和悬挂式缩进，使用悬挂式缩进应该注意第一行不应该有参数，连续行要使用进一步的缩进来区分。
@@ -110,12 +110,12 @@ result = some_function_that_takes_arguments(
     )
 ```
 
-<h5 id="3.2">A罩杯还是C罩杯?</h5>
+<h3 id="3.2">A罩杯还是C罩杯?</h3>
 除非项目中已经约定了使用 tab 作为缩进，最好使用 space。
 
 Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Python 2 代码应该被转换为仅使用 space。  
 
-<h5 id="3.3">代码行最大长度</h5>
+<h3 id="3.3">代码行最大长度</h3>
 将所有行限制为最多79个字符。
 
 对于具有较少结构限制（文档字符串或注释）的长文本块，行长度应限制为72个字符。
@@ -132,7 +132,7 @@ with open('/path/to/some/file/you/want/to/read') as file_1, \
 
 assert 语句也是如此。
 
-<h5 id="3.4">在二元运算符之前还是之后断行?</h5>
+<h3 id="3.4">在二元运算符之前还是之后断行?</h3>
 算法和程序设计技术先驱，计算机排版系统 TEX 和 METAFONT 的发明者 Donald Knuth，推荐使用以下形式：
 
 ```Python
@@ -146,7 +146,7 @@ income = (gross_wages
 
 只要保持本地一致性，在二元运算符之前和之后断开都是允许的，但是新的 Python 代码推荐使用 Knuth 形式。  
 
-<h5 id="3.5">空行</h5>
+<h3 id="3.5">空行</h3>
 顶层函数和类定义使用两个空行。
 
 类内方法定义使用一个空行。
@@ -155,14 +155,14 @@ income = (gross_wages
 
 总之，空行的作用就是隔离不同函数类等，层次分明。
 
-<h5 id="3.6">源文件编码</h5>
+<h3 id="3.6">源文件编码</h3>
 Python 2 默认ASCII，Python 3 默认UTF-8。
 
 使用 ASCII 的 Python 2 源文件或使用 UTF-8 的 Python 3 源文件不应该有编码声明。
 
 源文件最好只使用 ASCII 字符，即使是蹩脚的 Chinglish 亦可，家和万事兴。
 
-<h5 id="3.7">模块导入</h5>
+<h3 id="3.7">模块导入</h3>
 
 ```Python
 YES: from subprocess import Popen, PIPE
@@ -218,7 +218,7 @@ import foo.bar.yourclass
 from <module> import *
 ```
 
-<h5 id="3.8">模块级别 dunder 名称</h5>
+<h3 id="3.8">模块级别 dunder 名称</h3>
 模块级别 “dunders”（即具有两个前导和两个后缀下划线的名称），例如 __all__，\_\_author\_\_，\_\_version\_\_ 等应放在模块 docstring 之后，但在任何 import 语句之前，但是除了 \_\_future\_\_ 导入。 Python 强制 future-imports 必须在除了 docstrings 之外的任何其他代码之前出现在模块中。  
 例如：
 
@@ -238,13 +238,13 @@ import os
 import sys
 ```
 
-<h4 id="4">字符串引号</h4>
+<h2 id="4">字符串引号<h2>
 在 Python 中，单引号和双引号是等价的，只需要坚持使用一种并保持一致即可。
 
 在双引号中使用单引号，单引号中使用双引号。三引号中使用双引号。
 
-<h4 id="5">表达式和语句中的空格</h4>
-<h5 id="5.1">心理藏的小烦恼</h5>
+<h2 id="5">表达式和语句中的空格<h2>
+<h3 id="5.1">心理藏的小烦恼</h3>
 在以下场景避免不必要的空格
 
 ```Python
@@ -288,7 +288,7 @@ long_variable = 3
 
 ```
 
-<h5 id="5.2">其他建议</h5>
+<h3 id="5.2">其他建议</h3>
 在任何地方避免使用尾随空格。
 
 在二元运算符周围使用空格：
@@ -389,7 +389,7 @@ do_one(); do_two(); do_three(long, argument,
 
 if foo == 'blah': one(); two(); three()
 ```
-<h4 id="6">何时使用逗号结尾</h4>
+<h2 id="6">何时使用逗号结尾<h2>
 
 单元素元组强制使用逗号：
 
@@ -419,15 +419,15 @@ FILES = ['setup.cfg', 'tox.ini',]
 initialize(FILES, error=True,)
 ```
 
-<h4 id="7">注释</h4>
+<h2 id="7">注释<h2>
 
 糟糕的注释不如没有注释，一定要用 English 注释。
 
-<h5 id="7.1">块注释</h5>
+<h3 id="7.1">块注释</h3>
 
 同等级别的一块代码的注释，块注释内每行注释以 \# 开头，内部注释段落之间使用以 \# 开头的空行注释隔开。
 
-<h5 id="7.2">行注释</h5>
+<h3 id="7.2">行注释</h3>
 
 行注释和代码声明间至少间隔两个空格，不要使用无聊的行注释，例如：
 
@@ -441,7 +441,7 @@ But sometimes, this is useful:
 x = x + 1                 # Compensate for border
 ```
 
-<h5 id="7.3">文档字符串</h5>
+<h3 id="7.3">文档字符串</h3>
 
 为所有公共模块，函数，类和方法编写文档字符串。 对于非公共方法，文本字符串不是必需的，但应该有一个描述该方法的注释。  
 e.g.  
@@ -452,12 +452,12 @@ Optional plotz says to frobnicate the bizbaz first.
 """
 ```
 
-<h4 id="8">命名约定</h4>
-<h5 id="8.1">圣经戒律</h5>
+<h2 id="8">命名约定<h2>
+<h3 id="8.1">圣经戒律</h3>
 
 对用户可见的公共 API 部分的命名应该遵从反应如何使用而不是怎么实现。
 
-<h5 id="8.2">描述的: 命名风格</h5>
+<h3 id="8.2">描述的: 命名风格</h3>
 
 以下命名风格通常区分彼此使用：
 
@@ -491,13 +491,13 @@ Tkinter.Toplevel(master, class_='ClassName')
 
 * \_\_double\_leading\_and\_trailing\_underscore\_\_ : "魔幻的" 对象或属性，只生存于用户控制的命名空间。E.g. \_\_init\_\_ , \_\_import\_\_ 或 \_\_file\_\_ . 千万不要臆造这种命名; 只在文档中使用。
 
-<h5 id="8.3">规定的: 命名规定</h5>
+<h3 id="8.3">规定的: 命名规定</h3>
 
-<h6 id="8.3.1">避免的命名</h6>
+<h4 id="8.3.1">避免的命名</h4>
 
 一定不要使用 l O I 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
 
-<h6 id="8.3.2">包和模块命名</h6>
+<h4 id="8.3.2">包和模块命名</h4>
 
 模块应该使用简短并且全小写的命名，下划线也可以使用以提升可读性。
 
@@ -505,13 +505,13 @@ Python 包也应该使用简短的全小写名称，尽管不鼓励使用下划�
 
 当 C/C++ 编写的扩展模块伴随一个提供更高级别接口的 python 模块时，C/C++ 模块命名应该以下划线开头（e.g. \_socket）
 
-<h6 id="8.3.3">类名</h6>
+<h4 id="8.3.3">类名</h4>
 
 类名通常使用驼峰式命名习惯，在有了接口文档说明并且主要用于调用的情况下，类名也可以使用函数命名风格
 
 Note that there is a separate convention for builtin names: most builtin names are single words (or two words run together), with the CapWords convention used only for exception names and builtin constants.
 
-<h6 id="8.3.4">类型变量名</h6>
+<h4 id="8.3.4">类型变量名</h4>
 
 Names of type variables introduced in PEP 484 should normally use CapWords preferring short names: T , AnyStr , Num . It is recommended to add suffixes _co or _contra to the variables used to declare covariant or contravariant behavior correspondingly. Examples:
 
@@ -522,25 +522,25 @@ VT_co = TypeVar('VT_co', covariant=True)
 KT_contra = TypeVar('KT_contra', contravariant=True)
 ```
 
-<h6 id="8.3.5">异常名</h6>
+<h4 id="8.3.5">异常名</h4>
 
 异常应该是类，所以可以使用类命名习惯，但是，如果异常是个错误类，一般加上 "Error" 后缀
 
-<h6 id="8.3.6">全局变量名</h6>
+<h4 id="8.3.6">全局变量名</h4>
 
 我们假设这些全局变量只在一个模块内使用，这样的话和函数的命名习惯是一样的。
 
 设计为通过 <code>from M import *</code> 导入的类应该使用 __all__ 机制避免导出全局变量，或者可以使用老式的习惯，给这些全局变量名加上下划线作为前缀（表示这时非公有变量）
 
 
-<h6 id="8.3.6">函数名</h6>
+<h4 id="8.3.6">函数名</h4>
 
 e.g, <code>func</code> or <code>func_write_to_file</code>
 
 为了向后兼容性，也可以使用 mixedCase 式命名风格。
 
 
-<h6 id="8.3.7">函数和方法参数</h6>
+<h4 id="8.3.7">函数和方法参数</h4>
 
 实例方法第一个入参一定要是 self
 
@@ -550,7 +550,7 @@ e.g, <code>func</code> or <code>func_write_to_file</code>
 
 e.g, class_ 好过 clss
 
-<h6 id="8.3.8">方法名和实例变量</h6>
+<h4 id="8.3.8">方法名和实例变量</h4>
 
 使用函数命名风格即可。如果希望是私有方法或实例变量，则前缀下划线。
 
@@ -558,11 +558,11 @@ e.g, class_ 好过 clss
 
 如果类 Foo 有一个属性变量 __a，那么通过 Foo.__a 是不能访问的。（当然，固执的用户仍然可以通过 Foo._Foo__a 访问），一般来说，双下划线前缀只是在避免子类属性命名冲突的场景下使用。
 
-<h6 id="8.3.9">常量</h6>
+<h4 id="8.3.9">常量</h4>
 
 常量一般定义在模块级别。命名风格如：MAX_OVERFLOW 或 TOTAL 。
 
-<h6 id="8.3.10">继承设计</h6>
+<h4 id="8.3.10">继承设计</h4>
 
 经常去思考类方法和实例变量（属性）应该是公有的还是非公有的（严格意义上，python 没有私有变量）。如果不确定，那就设置成非公有的。
 
@@ -575,7 +575,7 @@ e.g, class_ 好过 clss
 * 对于简单的公有数据属性，不要使用复杂的存取函数，直接暴露属性名。
 * 如果设计继承基类时，不希望子类访问的属性加双下划线前缀。
 
-<h6 id="8.3.11">公共和内部接口</h6>
+<h4 id="8.3.11">公共和内部接口</h4>
 
 文档说明的接口一般认为是公共接口，除非文档明确声明为临时或内部接口（为了兼容性等其他原因），所有非文档说明的接口一般为内部接口。
 
@@ -742,6 +742,6 @@ No:    if greeting == True:
 Worse: if greeting is True:
 ```
 
-<h4 id="9.1">函数注释</h4>
+<h2 id="9.1">函数注释<h2>
 
 个人建议：和项目注释风格保持一致。赏心悦目，纷吾既有此内美兮，又重之以修能，即可。

@@ -41,10 +41,10 @@
      * [Function Annotations - 函数注释](#9.1)
 
 <h2 id="1">简介</h2>
-许多工程项目都有自己独有的编码风格指南。如果发生任何规则冲突，当然是与项目级别的代码风格保持一致。美其名曰：入乡随俗，Do what Romans do in Rome，到了罗马就跟着吃马肉，生在唐朝就吃胖点。
+许多工程项目都有自己独有的编码风格指南。如果发生任何规则冲突，当然是与项目级别的代码风格保持一致。美其名曰：入乡随俗，Do what Romans do in Rome，到了罗马就跟着吃马肉。
 
 <h2 id="2">愚蠢的一致性是小心灵的大地精</h2>
-代码风格一致性当然重要，毕竟读起来跟做spa一样爽，但有时也要有自己的判断，不要跟个傻X一样，明明是个90后，非得穿丝袜。
+代码风格一致性当然重要，毕竟读起来跟大保健一样爽，但有时也要有自己的判断。
 
 例如以下场景：
 
@@ -166,8 +166,8 @@ Python 2 默认ASCII，Python 3 默认UTF-8。
 
 ```Python
 是： from subprocess import Popen, PIPE
-     import os
-     import sys
+    import os
+    import sys
 
 否： import sys, os
 ```
@@ -219,7 +219,7 @@ from <module> import *
 ```
 
 <h3 id="3.8">模块级别 dunder 名称</h3>
-模块级别 “dunders”（即具有两个前导和两个后缀下划线的名称），例如 __all__，\_\_author\_\_，\_\_version\_\_ 等应放在模块 docstring 之后，但在任何 import 语句之前，但是除了 \_\_future\_\_ 导入。 Python 强制 future-imports 必须在除了 docstrings 之外的任何其他代码之前出现在模块中。  
+模块级别 “dunders”（即具有两个前导和两个后缀下划线的名称），例如 \_\_all\_\_，\_\_author\_\_，\_\_version\_\_ 等应放在模块 docstring 之后，但在任何 import 语句之前，但是除了 \_\_future\_\_ 导入。 Python 强制 future-imports 必须在除了 docstrings 之外的任何其他代码之前出现在模块中。  
 例如：
 
 ```Python
@@ -443,8 +443,7 @@ x = x + 1                 # Compensate for border
 
 <h3 id="7.3">文档字符串</h3>
 
-为所有公共模块，函数，类和方法编写文档字符串。 对于非公共方法，文本字符串不是必需的，但应该有一个描述该方法的注释。  
-e.g.  
+为所有公共模块，函数，类和方法编写文档字符串。 对于非公共方法，文本字符串不是必需的，但应该有一个描述该方法的注释。e.g，  
 ```python
 """Return a foobang
 
@@ -477,25 +476,25 @@ Optional plotz says to frobnicate the bizbaz first.
 
 <blockquote>Note: 使用驼峰式时，缩写全部大写，例如：HTTPServerError 好于 HttpServerError </blockquote>
 
-* mixedCase (乌鬼头，寡人比喻的，形象不)
+* mixedCase (乌鬼头)
 
 * Capitalized_Words_With_Underscores (丑！不解释！)
 
 * \_single\_leading\_underscore : weak "internal use" indicator. E.g. from M import * 不会导入下划线开头的对象
 
-* single\_trailing\_underscore\_ : 用来避免和 python 关键字冲突, e.g:
+* single\_trailing\_underscore\_ : 用来避免和 python 关键字冲突, e.g：
 ```python
 Tkinter.Toplevel(master, class_='ClassName')
 ```
 * \_\_double\_leading_underscore : 当对类属性命名时, 调用名改变 (在 FooBar 类内, \_\_boo 变成了 \_FooBar\_\_boo ; see bellow)
 
-* \_\_double\_leading\_and\_trailing\_underscore\_\_ : "魔幻的" 对象或属性，只生存于用户控制的命名空间。E.g. \_\_init\_\_ , \_\_import\_\_ 或 \_\_file\_\_ . 千万不要臆造这种命名; 只在文档中使用。
+* \_\_double\_leading\_and\_trailing\_underscore\_\_ : "魔幻的" 对象或属性，只生存于用户控制的命名空间。E.g， \_\_init\_\_ , \_\_import\_\_ 或 \_\_file\_\_ . 千万不要臆造这种命名; 只在文档中使用。
 
 <h3 id="8.3">规定的: 命名规定</h3>
 
 <h4 id="8.3.1">避免的命名</h4>
 
-一定不要使用 l O I 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
+一定不要使用 l(唉欧儿) O（偶） I（艾） 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
 
 <h4 id="8.3.2">包和模块命名</h4>
 
@@ -503,7 +502,7 @@ Tkinter.Toplevel(master, class_='ClassName')
 
 Python 包也应该使用简短的全小写名称，尽管不鼓励使用下划线。
 
-当 C/C++ 编写的扩展模块伴随一个提供更高级别接口的 python 模块时，C/C++ 模块命名应该以下划线开头（e.g. \_socket）
+当 C/C++ 编写的扩展模块伴随一个提供更高级别接口的 python 模块时，C/C++ 模块命名应该以下划线开头（e.g。 \_socket）
 
 <h4 id="8.3.3">类名</h4>
 
@@ -618,7 +617,7 @@ f = lambda x: 2*x
 ```
 The use of the assignment statement eliminates the sole benefit a lambda expression can offer over an explicit def statement (i.e. that it can be embedded inside a larger expression
 
-* 捕获的异常要说明 "错误出在哪里了? " 而不是仅仅说明 "出问题了"
+* 捕获的异常要说明 "错误出在哪里了 ？" 而不是仅仅说明 "出问题了！"
 
 * 异常转移时，要讲详细的异常信息保留到新的异常中（Python 2: "raise X" Python 3: "raise X from Y"）
 
@@ -716,7 +715,6 @@ def bar(x):
 * 对象类型比较因该使用isinstance() 而不是直接比较，e.g：
 ```python
 是： if isinstance(obj, int):
-
 否： if type(obj) is type(1):
 ```
 在 Python 2 中，string 和 unicode 公共基类是 basestring，因此：
@@ -727,10 +725,10 @@ if isinstance(obj, basestring):
 * 对于序列（字符串，列表，元组），空的序列是 false：
 ```python
 是：if not seq:
-    if seq:
+   if seq:
 
 否：if len(seq):
-    if not len(seq):
+   if not len(seq):
 ```
 
 * 不要使用尾随空格
@@ -739,9 +737,9 @@ if isinstance(obj, basestring):
 ```python
 是：   if greeting:
 否：   if greeting == True:
-糟糕: if greeting is True:
+糟糕： if greeting is True:
 ```
 
 <h2 id="9.1">函数注释</h2>
 
-个人建议：和项目注释风格保持一致。赏心悦目，纷吾既有此内美兮，又重之以修能，即可。
+个人建议：赏心悦目，纷吾既有此内美兮，又重之以修能，即可。

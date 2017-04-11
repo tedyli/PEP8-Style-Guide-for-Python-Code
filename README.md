@@ -5,9 +5,9 @@
 * [A Foolish Consistency is the Hobgoblin of Little Minds - 愚蠢的一致性是小心灵的大地精](#2)
 * [Code lay-out - 代码布局](#3)
     * [Indentation - 缩进](#3.1)
-    * [Tabs or Spaces? - A罩杯还是C罩杯?](#3.2)
+    * [Tabs or Spaces? - A罩杯还是C罩杯？](#3.2)
     * [Maximum Line Length - 代码行最大长度](#3.3)
-    * [Should a line break before or after a binary operator? - 在二元运算符之前还是之后断行?](#3.4)
+    * [Should a line break before or after a binary operator? - 在二元运算符之前还是之后断行？](#3.4)
     * [Blank Lines - 空行](#3.5)
     * [Source File Encoding - 源文件编码](#3.6)
     * [Imports - 模块导入](#3.7)
@@ -48,7 +48,7 @@
 
 例如以下场景：
 
-1、遵循此风格让你的那一小片代码看起来格格不入，清高的不行。
+1、遵循此风格让你的那一小片代码看起来格格不入，清高的不要不要的。
 
 2、遵循此风格后和其他 python 版本不兼容，甚至出现错误。
 
@@ -111,7 +111,7 @@ result = some_function_that_takes_arguments(
     )
 ```
 
-<h3 id="3.2">A罩杯还是C罩杯?</h3>
+<h3 id="3.2">A罩杯还是C罩杯？</h3>
 
 除非项目中已经约定了使用 tab 作为缩进，最好使用 space。
 
@@ -530,7 +530,7 @@ Python 包也应该使用简短的全小写名称，尽管不鼓励使用下划�
 
 The naming convention for functions may be used instead in cases where the interface is documented and used primarily as a callable.
 
-对于 builtin 函数的命名习惯，可以通过<code>dir(__builtins__)</code>查看，注意区分普通命名，异常名命名和 builtin 常量。
+对于 builtin 函数的命名习惯，可以通过 <code>dir(\_\_builtins\_\_)</code> 查看，注意区分普通命名，异常名命名和 builtin 常量。
 
 <h4 id="8.3.4">类型变量名</h4>
 
@@ -766,3 +766,4 @@ if isinstance(obj, basestring):
     if greeting is True:
 ```
 
+## --- 别扯了，再扯蛋都碎了 ---

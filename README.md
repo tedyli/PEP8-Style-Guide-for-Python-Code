@@ -1,5 +1,5 @@
 # PEP 8 - Python 代码风格指南
-## Contents
+## 赏心悦目，纷吾既有此内美兮，又重之以修能。
 
 * [Introduction - 简介](#1)
 * [A Foolish Consistency is the Hobgoblin of Little Minds - 愚蠢的一致性是小心灵的大地精](#2)
@@ -37,8 +37,6 @@
         * [Constants - 常量](#8.3.10)
         * [Designing for inheritance - 继承设计](#8.3.11)
         * [Public and internal interfaces - 公共和内部接口](#8.3.12)
-* [Programming Recommendations - 编码建议](#9)
-     * [Function Annotations - 函数注释](#9.1)
 
 <h2 id="1">简介</h2>
 
@@ -154,13 +152,13 @@ income = (gross_wages
 
 <h3 id="3.5">空行</h3>
 
-顶层函数和类定义使用两个空行。
+顶层函数和类定义间使用两个空行。
 
-类内方法定义使用一个空行。
+类内方法定义间使用一个空行。
 
-不同函数组之间使用额外的空行隔离。
+不同函数组之间使用两个空行隔离。
 
-总之，空行的作用就是隔离不同函数类等，层次分明。
+总之，空行的作用就是隔离不同函数类等，使层次分明。
 
 <h3 id="3.6">源文件编码</h3>
 
@@ -272,18 +270,18 @@ import sys
 否： if x == 4 : print x , y ; x , y = y , x
 
 是：
-ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
-ham[lower:upper], ham[lower:upper:], ham[lower::step]
-ham[lower+offset : upper+offset]
-ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
-ham[lower + offset : upper + offset]
+    ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+    ham[lower:upper], ham[lower:upper:], ham[lower::step]
+    ham[lower+offset : upper+offset]
+    ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+    ham[lower + offset : upper + offset]
 
 否：
-ham[lower + offset:upper + offset]
-ham[1: 9], ham[1 :9], ham[1:9 :3]
-ham[lower : : upper]
-ham[ : upper]
-
+    ham[lower + offset:upper + offset]
+    ham[1: 9], ham[1 :9], ham[1:9 :3]
+    ham[lower : : upper]
+    ham[ : upper]
+    
 是： spam(1)
 否： spam (1)
 
@@ -291,15 +289,15 @@ ham[ : upper]
 否： dct ['key'] = lst [index]
 
 是：
-x = 1
-y = 2
-long_variable = 3
-
+    x = 1
+    y = 2
+    long_variable = 3
+    
 否：
-x             = 1
-y             = 2
-long_variable = 3
-
+    x             = 1
+    y             = 2
+    long_variable = 3
+    
 ```
 
 <h3 id="5.2">其他建议</h3>
@@ -311,44 +309,44 @@ long_variable = 3
 ```python
 是：
 
-i = i + 1
-submitted += 1
-x = x*2 - 1
-hypot2 = x*x + y*y
-c = (a+b) * (a-b)
-
+    i = i + 1
+    submitted += 1
+    x = x*2 - 1
+    hypot2 = x*x + y*y
+    c = (a+b) * (a-b)
+    
 否：
 
-i=i+1
-submitted +=1
-x = x * 2 - 1
-hypot2 = x * x + y * y
-c = (a + b) * (a - b)
+    i=i+1
+    submitted +=1
+    x = x * 2 - 1
+    hypot2 = x * x + y * y
+    c = (a + b) * (a - b)
 ```
-表示关键字参数货默认参数值时，不要使用空格：
+表示关键字参数或默认参数值时，不要使用空格：
 
 ```python
 是：
 
-def complex(real, imag=0.0):
-    return magic(r=real, i=imag)
+    def complex(real, imag=0.0):
+        return magic(r=real, i=imag)
 否：
 
-def complex(real, imag = 0.0):
-    return magic(r = real, i = imag)
+    def complex(real, imag = 0.0):
+        return magic(r = real, i = imag)
 ```
-函数注释的场景：
+函数注解的场景：
 
 ```python
 是：
 
-def munge(input: AnyStr): ...
-def munge() -> AnyStr: ...
+    def munge(input: AnyStr): ...
+    def munge() -> AnyStr: ...
 
 否：
 
-def munge(input:AnyStr): ...
-def munge()->PosInt: ...
+    def munge(input:AnyStr): ...
+    def munge()->PosInt: ...
 ```
 
 当参数注释和默认值共存时：
@@ -356,30 +354,30 @@ def munge()->PosInt: ...
 ```python
 是：
 
-def munge(sep: AnyStr = None): ...
-def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
+    def munge(sep: AnyStr = None): ...
+    def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
 
 否：
 
-def munge(input: AnyStr=None): ...
-def munge(input: AnyStr, limit = 1000): ...
+    def munge(input: AnyStr=None): ...
+    def munge(input: AnyStr, limit = 1000): ...
 ```
 
-复合声明不建议使用：
+同行多语句不建议使用：
 
 ```python
 是：
 
-if foo == 'blah':
-    do_blah_thing()
-do_one()
-do_two()
-do_three()
+    if foo == 'blah':
+        do_blah_thing()
+    do_one()
+    do_two()
+    do_three()
 
 Rather not:
 
-if foo == 'blah': do_blah_thing()
-do_one(); do_two(); do_three()
+    if foo == 'blah': do_blah_thing()
+    do_one(); do_two(); do_three()
 ```
 
 下面这种丑就不多说了：
@@ -387,22 +385,22 @@ do_one(); do_two(); do_three()
 ```python
 Rather not:
 
-if foo == 'blah': do_blah_thing()
-for x in lst: total += x
-while t < 10: t = delay()
+    if foo == 'blah': do_blah_thing()
+    for x in lst: total += x
+    while t < 10: t = delay()
 
 Definitely not:
 
-if foo == 'blah': do_blah_thing()
-else: do_non_blah_thing()
+    if foo == 'blah': do_blah_thing()
+    else: do_non_blah_thing()
 
-try: something()
-finally: cleanup()
+    try: something()
+    finally: cleanup()
 
-do_one(); do_two(); do_three(long, argument,
-                             list, like, this)
+    do_one(); do_two(); do_three(long, argument,
+                                 list, like, this)
 
-if foo == 'blah': one(); two(); three()
+    if foo == 'blah': one(); two(); three()
 ```
 
 <h2 id="6">何时使用逗号结尾</h2>
@@ -412,27 +410,27 @@ if foo == 'blah': one(); two(); three()
 ```python
 是：
 
-FILES = ('setup.cfg',)
+    FILES = ('setup.cfg',)
 
 OK, but confusing:
 
-FILES = 'setup.cfg',
+    FILES = 'setup.cfg',
 ```
 当使用版本控制系统时，一组希望后续扩展的值/参数/改善的条目使用以下形式：
 ```python
 是：
 
-FILES = [
-    'setup.cfg',
-    'tox.ini',
-    ]
-initialize(FILES,
-           error=True,
-           )
+    FILES = [
+        'setup.cfg',
+        'tox.ini',
+        ]
+    initialize(FILES,
+               error=True,
+               )
 否：
 
-FILES = ['setup.cfg', 'tox.ini',]
-initialize(FILES, error=True,)
+    FILES = ['setup.cfg', 'tox.ini',]
+    initialize(FILES, error=True,)
 ```
 
 <h2 id="7">注释</h2>
@@ -452,7 +450,7 @@ Don't do this:
 
 x = x + 1                 # Increment x
 
-But sometimes, this is useful(老外调皮的一腿):
+But sometimes, this is useful:
 
 x = x + 1                 # Compensate for border
 ```
@@ -465,7 +463,12 @@ x = x + 1                 # Compensate for border
 
 Optional plotz says to frobnicate the bizbaz first.
 """
+
+"""only one single docstring line"""
 ```
+<blockquote>
+Note that most importantly, the """ that ends a multiline docstring should be on a line by itself
+</blockquote>
 
 <h2 id="8">命名约定</h2>
 
@@ -499,13 +502,13 @@ Optional plotz says to frobnicate the bizbaz first.
 
 * \_single\_leading\_underscore : 弱地 "内部使用" 指示器. 例如，from M import * 不会导入下划线开头的对象
 
-* single\_trailing\_underscore\_ : 用来避免和 python 关键字冲突, 例如：
+* single\_trailing\_underscore\_ : 用来避免和 python 关键字冲突，例如：
 ```python
 Tkinter.Toplevel(master, class_='ClassName')
 ```
-* \_\_double\_leading_underscore : 当对类属性命名时, 调用名改变 (在 FooBar 类内, \_\_boo 变成了 \_FooBar\_\_boo ; 看下面(别想多))
+* \_\_double\_leading_underscore : 当对类属性命名时，调用名改变 (在 FooBar 类内，\_\_boo 变成了 \_FooBar\_\_boo；后面有介绍)
 
-* \_\_double\_leading\_and\_trailing\_underscore\_\_ : "魔幻的" 对象或属性，只生存于用户控制的命名空间。例如， \_\_init\_\_ , \_\_import\_\_ 或 \_\_file\_\_ . 千万不要臆造这种命名; 只在文档中使用。
+* \_\_double\_leading\_and\_trailing\_underscore\_\_ : "魔幻的" 对象或属性，只生存于用户控制的命名空间。例如， \_\_init\_\_ ，\_\_import\_\_ 或 \_\_file\_\_ 。千万不要臆造这种命名； only use them as documented.
 
 <h3 id="8.3">规定性: 命名习惯</h3>
 
@@ -523,13 +526,15 @@ Python 包也应该使用简短的全小写名称，尽管不鼓励使用下划�
 
 <h4 id="8.3.3">类名</h4>
 
-类名通常使用驼峰式命名习惯，在有了接口文档说明并且主要用于调用的情况下，类名也可以使用函数命名风格
+类名通常使用驼峰式命名习惯。
 
-<blockquote>Note that there is a separate convention for builtin names: most builtin names are single words (or two words run together), with the CapWords convention used only for exception names and builtin constants.</blockquote>
+The naming convention for functions may be used instead in cases where the interface is documented and used primarily as a callable.
+
+对于 builtin 函数的命名习惯，可以通过<code>dir(__builtins__)</code>查看，注意区分普通命名，异常名命名和 builtin 常量。
 
 <h4 id="8.3.4">类型变量名</h4>
 
-Names of type variables introduced in PEP 484 should normally use CapWords preferring short names: T , AnyStr , Num . It is recommended to add suffixes _co or _contra to the variables used to declare covariant or contravariant behavior correspondingly. Examples:
+相对于短名称如：T , AnyStr , Num，使用驼峰式命名习惯较好，如：
 
 ```python
 from typing import TypeVar
@@ -546,7 +551,7 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 
 我们假设这些全局变量只在一个模块内使用，这样的话和函数的命名习惯是一样的。
 
-设计为通过 <code>from M import *</code> 导入的类应该使用 __all__ 机制避免导出全局变量，或者可以使用老式的习惯，给这些全局变量名加上下划线作为前缀（表示这是非公有变量）
+设计为通过 <code>from M import *</code> 导入的类应该使用 \_\_all\_\_ 机制避免导出全局变量，或者可以使用老式的习惯，给这些全局变量名加上下划线作为前缀（表示这是非公有变量）
 
 
 <h4 id="8.3.7">函数名</h4>
@@ -600,36 +605,36 @@ e.g, class_ 好过 clss
 
 如果包含的任何一个命名空间（package, module or class）是内部的，那么这个接口也被认为是内部接口。
 
-Imported names should always be considered an implementation detail. Other modules must not rely on indirect access to such imported names unless they are an explicitly documented part of the containing module's API, such as os.path or a package's __init__ module that exposes functionality from submodules.
+Imported names should always be considered an implementation detail. Other modules must not rely on indirect access to such imported names unless they are an explicitly documented part of the containing module's API, such as os.path or a package's \_\_init\_\_ module that exposes functionality from submodules.
 
 <h3 id="9">编码建议</h3>
 
 * 代码不应该以一种不利于其他 python 实现（PyPy, Jython, IronPython, Cython, Psyco 诸如此类）的方式编写。 例如：不要使用 a += b 或 a = a + b 来实现就地字符串连接，在库的性能敏感部分，应该使用 ''.join() 的形式，这就能保证在不同的 python 实现中，连接动作可以在线性时间内完成。
 
-* 和例如 None 这类 singleton 的比较，应该使用 is 或 is not 而不是等号符。另外，小心使用 if x 如果你的本意是 if x is not None，如果 x 是个布尔变量值 false，就完蛋了。
+* 和例如 None 这类 singleton 的比较，应该使用 is 或 is not 而不是等号符。另外，小心使用 <code>if x</code> 如果你的本意是 <code>if x is not None</code>，如果 x 是个布尔变量值 false，就完蛋了。
 
 * 尽管功能相同，从可读性上考虑：
 ```python
 是：
 
-if foo is not None:
+    if foo is not None:
 
 否：
 
-if not foo is None:
+    if not foo is None:
 ```
 
 * When implementing ordering operations with rich comparisons, it is best to implement all six operations ( \_\_eq\_\_ , \_\_ne\_\_ , \_\_lt\_\_ , \_\_le\_\_ , \_\_gt\_\_ , \_\_ge\_\_ ) rather than relying on other code to only exercise a particular comparison.
 
-* 使用 def 语句而不是赋值语句直接绑定一个 lambda 表达式到标志符上：
+* 使用 def 语句而不用赋值语句直接绑定一个 lambda 表达式到标识符上：
 ```python
 是：
 
-def f(x): return 2*x
+    def f(x): return 2*x
 
 否：
 
-f = lambda x: 2*x
+    f = lambda x: 2*x
 ```
 The use of the assignment statement eliminates the sole benefit a lambda expression can offer over an explicit def statement (i.e. that it can be embedded inside a larger expression
 
@@ -637,7 +642,7 @@ The use of the assignment statement eliminates the sole benefit a lambda express
 
 * 异常转移时，要讲详细的异常信息保留到新的异常中（Python 2: "raise X" Python 3: "raise X from Y"）
 
-* 当在 Python 2 中抛出异常时，使用<code>raise ValueError('message')</code>而不是<code>raise ValueError, 'message'</code>，这样可以避免行连续符的使用
+* 当在 Python 2 中抛出异常时，使用 <code>raise ValueError('message')</code> 而不用 <code>raise ValueError, 'message'</code>，这样可以避免行连续符的使用
 
 * 当捕获异常时，尽可能提及具体的异常而不是使用一个裸露的 except 子句，例如：
 ```python
@@ -661,21 +666,21 @@ except Exception as exc:
 ```python
 是：
 
-try:
-    value = collection[key]
-except KeyError:
-    return key_not_found(key)
-else:
-    return handle_value(value)
+    try:
+        value = collection[key]
+    except KeyError:
+        return key_not_found(key)
+    else:
+        return handle_value(value)
 
 否：
 
-try:
-    # Too broad!
-    return handle_value(collection[key])
-except KeyError:
-    # Will also catch KeyError raised by handle_value()
-    return key_not_found(key)
+    try:
+        # Too broad!
+        return handle_value(collection[key])
+    except KeyError:
+        # Will also catch KeyError raised by handle_value()
+        return key_not_found(key)
 ```
 
 * 特定代码块的本地资源使用 with 语句确保使用后立即释放，try/finally 也可以
@@ -684,40 +689,40 @@ except KeyError:
 ```python
 是：
 
-with conn.begin_transaction():
-    do_stuff_in_transaction(conn)
+    with conn.begin_transaction():
+        do_stuff_in_transaction(conn)
 
 否：
 
-with conn:
-    do_stuff_in_transaction(conn) 
+    with conn:
+        do_stuff_in_transaction(conn) 
 ```
 
 * 返回值要一致，be consistent：
 ```python
 是：
 
-def foo(x):
-    if x >= 0:
+    def foo(x):
+        if x >= 0:
+            return math.sqrt(x)
+        else:
+            return None
+    
+    def bar(x):
+        if x < 0:
+            return None
         return math.sqrt(x)
-    else:
-        return None
-
-def bar(x):
-    if x < 0:
-        return None
-    return math.sqrt(x)
 
 否：
 
-def foo(x):
-    if x >= 0:
+    def foo(x):
+        if x >= 0:
+            return math.sqrt(x)
+    
+    def bar(x):
+        if x < 0:
+            return
         return math.sqrt(x)
-
-def bar(x):
-    if x < 0:
-        return
-    return math.sqrt(x)
 ```
 
 * 使用 string 方法而不是 string 模块。it's faster。当然，除了 2.0 版本之前 python 代码的向后兼容性
@@ -761,6 +766,3 @@ if isinstance(obj, basestring):
     if greeting is True:
 ```
 
-<h2 id="9.1">函数注释</h2>
-
-个人建议：赏心悦目，纷吾既有此内美兮，又重之以修能，即可。

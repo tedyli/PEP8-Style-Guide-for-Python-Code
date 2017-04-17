@@ -1,17 +1,17 @@
-# PEP 8 - Python 代码风格指南（编码规范）
+# PEP 8 - Python 代码风格指南
 ## 纷吾既有此内美兮，又重之以修能。 -- 《离骚》屈原
 
 * [Introduction - 简介](#1)
 * [A Foolish Consistency is the Hobgoblin of Little Minds - 愚蠢的一致性是小心灵的大地精](#2)
 * [Code lay-out - 代码布局](#3)
     * [Indentation - 缩进](#3.1)
-    * [Tabs or Spaces? - A罩杯还是C罩杯？](#3.2)
+    * [Tabs or Spaces? - A 罩杯还是 E 罩杯 ？](#3.2)
     * [Maximum Line Length - 代码行最大长度](#3.3)
     * [Should a line break before or after a binary operator? - 在二元运算符之前还是之后断行？](#3.4)
     * [Blank Lines - 空行](#3.5)
     * [Source File Encoding - 源文件编码](#3.6)
     * [Imports - 模块导入](#3.7)
-    * [Module level dunder names - 模块级 dunder(文中解释) 名称](#3.8)
+    * [Module level dunder names - 模块级 dunder 名称](#3.8)
 * [String Quotes - 字符串引号](#4)
 * [Whitespace in Expressions and Statements - 表达式和语句中的空格](#5)
     * [Pet Peeves - 心理藏的小烦恼](#5.1)
@@ -40,15 +40,17 @@
 
 <h2 id="1">简介</h2>
 
-许多工程项目都有自己独有的编码风格指南。如果发生任何规则冲突，当然是与项目级别的代码风格保持一致。美其名曰：入乡随俗，Do what Romans do in Rome，到了罗马就跟着吃马肉。
+很多项目工程都有自己独有的编码风格。如果发生任何规则冲突，当然是与项目级别的代码风格保持一致。
+
+美其名曰：入乡随俗，Do what Romans do in Rome，到了罗马就烤马肉吃。
 
 <h2 id="2">愚蠢的一致性是小心灵的大地精</h2>
 
-代码风格一致性当然重要，毕竟读起来跟大保健一样爽，但有时也要有自己的判断。
+代码风格一致性当然重要，读起来滑溜溜，跟做大保健一样爽，但有时也要有自己的判断。
 
 例如以下场景：
 
-1、遵循此风格让你的那一小片代码看起来格格不入，清高的不要不要的。
+1、遵循此风格让你的那一小片代码看起来格格不入，看到就想抠出来，人人见而诛之。
 
 2、遵循此风格后和其他 python 版本不兼容，甚至出现错误。
 
@@ -111,9 +113,9 @@ result = some_function_that_takes_arguments(
     )
 ```
 
-<h3 id="3.2">A罩杯还是C罩杯？</h3>
+<h3 id="3.2">A 罩杯还是 E 罩杯 ？</h3>
 
-除非项目中已经约定了使用 tab 作为缩进，最好使用 space。
+A 罩杯。
 
 Python 3 不允许 tab 和 space 混用，同时混用了 tab 和 space 的 Python 2 代码应该被转换为仅使用 space。  
 
@@ -187,6 +189,7 @@ Python 2 默认ASCII，Python 3 默认UTF-8。
 * 标准库 imports  
 * 相关第三方 imports  
 * 本地特定应用／库 imports  
+
 推荐使用绝对导入，标准库代码应总是使用绝对导入。
 
 ```Python
@@ -720,7 +723,7 @@ except Exception as exc:
         do_stuff_in_transaction(conn) 
 ```
 
-* 函数返回语句要一致。在一个函数内的所有返回语句要么都返回一个表达式，要么都不返回。如果任何一个返回语句返回了表达式，那么其他任何没有返回值的语句应该明确声明为 return None。并且在函数结束部分必须出现返回语句：
+* 函数返回语句要一致。在一个函数内的所有返回语句要么都返回一个表达式，要么都不返回。如果任何一个返回语句返回了表达式，那么其他任何没有返回值的语句应该明确声明为 return None。在函数结束部分必须出现返回语句：
 ```python
 是：
 
@@ -769,7 +772,7 @@ except Exception as exc:
 if isinstance(obj, basestring):
 ```
 
-在 Python 3 中，unicode 和 basestring 已经不复存在了(there's only str)，并且 bytes object 也不再视为一种 string 了，而是一个整形序列
+在 Python 3 中，unicode 和 basestring 已然不复存在(there's only str)，并且 bytes object 也不再视为一种 string 了，而是一个整形序列
 
 * 对于序列（字符串，列表，元组）的判空操作：
 ```python
@@ -788,17 +791,11 @@ if isinstance(obj, basestring):
 
 ```python
 是：
-    if greeting:
+      if greeting:
 否：
-    if greeting == True:
+      if greeting == True:
 虾扯蛋：
-    if greeting is True:
+      if greeting is True:
 ```
-
-
-
-
-
-
 
 ## --- 别扯了，再扯蛋都碎了 ---

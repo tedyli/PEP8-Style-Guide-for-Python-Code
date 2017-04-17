@@ -46,7 +46,7 @@
 
 <h2 id="2">愚蠢的一致性是小心灵的大地精</h2>
 
-代码风格一致性当然重要，读起来滑溜溜，跟做大保健一样爽，但有时也要有自己的判断。
+代码风格一致性固然重要，毕竟读起来滑溜溜，跟做大保健一样爽，但有时也要有自己的判断。
 
 例如以下场景：
 
@@ -60,41 +60,55 @@
 
 一个缩进级别四个空格。
 
-* 连续行使用两种方式使封装元素成为一行：括号内垂直隐式连接和悬挂式缩进，使用悬挂式缩进应该注意第一行不应该有参数，连续行要使用进一步的缩进来区分。
+* 连续行使用两种方式使封装元素成为一行：括号内垂直隐式连接 & 悬挂式缩进。 使用悬挂式缩进应该注意第一行不应该有参数，连续行要使用进一步的缩进来区分。
 
 ```Python
-# Aligned with opening delimiter.
+
+是：
+
+# 括号内隐式连接，垂直对齐
 foo = long_function_name(var_one, var_two,
                          var_three, var_four)
 
-# More indentation included to distinguish this from the rest.
+# 悬挂缩进，进一步缩进区分其他语句
 def long_function_name(
         var_one, var_two, var_three,
         var_four):
     print(var_one)
 
-# Hanging indents should add a level.
+# 悬挂缩进，一般是四个空格，但非必须
 foo = long_function_name(
     var_one, var_two,
     var_three, var_four)
+
+否：
+
+# 括号内隐式连接，没有垂直对齐时，第一行的参数被禁止
+foo = long_function_name(var_one, var_two,
+    var_three, var_four)
+
+# 悬挂缩进，需要进一步的缩进区分其他行
+def long_function_name(
+    var_one, var_two, var_three,
+    var_four):
+    print(var_one)
 ```
 
-* 当 if 语句过长需要换行时，以下处理方法可以采用。
+* 当 if 语句过长时，可选的处理方式，但不限于此：
 
-```Python
-# No extra indentation.
+```python
+# 不使用额外缩进
 if (this_is_one_thing and
     that_is_another_thing):
     do_something()
 
-# Add a comment, which will provide some distinction in editors
-# supporting syntax highlighting.
+# 增加注释区分，支持语法高亮
 if (this_is_one_thing and
     that_is_another_thing):
     # Since both conditions are true, we can frobnicate.
     do_something()
-
-# Add some extra indentation on the conditional continuation line.
+    
+# 条件连续行额外缩进
 if (this_is_one_thing
         and that_is_another_thing):
     do_something()
@@ -111,6 +125,17 @@ result = some_function_that_takes_arguments(
     'a', 'b', 'c',
     'd', 'e', 'f',
     )
+```
+或者
+```python
+my_list = [
+    1, 2, 3,
+    4, 5, 6,
+]
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+)
 ```
 
 <h3 id="3.2">A 罩杯还是 E 罩杯 ？</h3>

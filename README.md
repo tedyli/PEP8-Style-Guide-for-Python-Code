@@ -611,9 +611,10 @@ Imported names should always be considered an implementation detail. Other modul
 
 * 代码不应该以一种不利于其他 python 实现（PyPy, Jython, IronPython, Cython, Psyco 诸如此类）的方式编写。 例如：不要使用 a += b 或 a = a + b 来实现就地字符串连接，在库的性能敏感部分，应该使用 ''.join() 的形式，这就能保证在不同的 python 实现中，连接动作可以在线性时间内完成。
 
-* 和例如 None 这类 singleton 的比较，应该使用 is 或 is not 而不是等号符。另外，小心使用 <code>if x</code> 如果你的本意是 <code>if x is not None</code>，如果 x 是个布尔变量值 false，就完蛋了。
+* 和例如 None 这类 singleton 的比较，应该使用 is 或 is not 而不是 ==。另外，小心使用 <code>if x</code> 如果你的本意是 <code>if x is not None</code>，如果 x 是个布尔变量值 false，那可就完蛋了。
 
 * 尽管功能相同，从可读性上考虑：
+
 ```python
 是：
 
@@ -626,7 +627,12 @@ Imported names should always be considered an implementation detail. Other modul
 
 * When implementing ordering operations with rich comparisons, it is best to implement all six operations ( \_\_eq\_\_ , \_\_ne\_\_ , \_\_lt\_\_ , \_\_le\_\_ , \_\_gt\_\_ , \_\_ge\_\_ ) rather than relying on other code to only exercise a particular comparison.
 
+To minimize the effort involved, the functools.total_ordering() decorator provides a tool to generate missing comparison methods.
+
+PEP 207 indicates that reflexivity rules are assumed by Python. Thus, the interpreter may swap y > x with x < y , y >= x with x <= y , and may swap the arguments of x == y and x != y . The sort() and min() operations are guaranteed to use the < operator and the max() function uses the > operator. However, it is best to implement all six operations so that confusion doesn't arise in other contexts.
+
 * 使用 def 语句而不用赋值语句直接绑定一个 lambda 表达式到标识符上：
+
 ```python
 是：
 
@@ -636,15 +642,19 @@ Imported names should always be considered an implementation detail. Other modul
 
     f = lambda x: 2*x
 ```
+
 The use of the assignment statement eliminates the sole benefit a lambda expression can offer over an explicit def statement (i.e. that it can be embedded inside a larger expression
 
 * 捕获的异常要说明 "错误出在哪里了 ？" 而不是仅仅说明 "哎呀！出问题了！"
 
-* 异常转移时，要讲详细的异常信息保留到新的异常中（Python 2: "raise X" Python 3: "raise X from Y"）
+* 正确使用异常链接。在 Python 3 中，应该使用 "raise X from Y" 来表示显式替换并且不会丢失原始追溯。
 
-* 当在 Python 2 中抛出异常时，使用 <code>raise ValueError('message')</code> 而不用 <code>raise ValueError, 'message'</code>，这样可以避免行连续符的使用
+当有意替换一个内部异常(Python 2: "raise X", Python 3.3+: raise X from Non)时，请确保将相关的详细信息转移到新的异常(例如，将 KeyError 转换为 AttributeError 时保留属性名称，或将原始异常的文本嵌入到新的异常消息中)。
 
-* 当捕获异常时，尽可能提及具体的异常而不是使用一个裸露的 except 子句，例如：
+* 当在 Python 2 中抛出异常时，使用 <code>raise ValueError('message')</code> 而不是老式的 <code>raise ValueError, 'message'</code>，后者已经在 Python 3 中废弃。由于使用了括号，可以避免行连续符的使用
+
+* 当捕获异常时，尽可能提及具体的异常而不是使用一个赤裸裸的 except 子句。一个裸露的 except: 子句将捕获 SystemExit 和 KeyboardInterrupt 异常，这样的话就难于使用 control-c 中断程序，并可能掩盖其他问题。如果想要捕获标志程序错误的所有异常的话，用 except Exception:(裸露的 except 子句等同于 except BaseException:)：
+
 ```python
 try:
     import platform_specific_module
@@ -652,7 +662,16 @@ except ImportError:
     platform_specific_module = None
 ```
 
-* 当对捕获的异常重命名时，使用以下语法：
+<blockquote>
+一个很好的经验法则是将裸露的 except 子句仅用于以下两种情况：
+
+1、If the exception handler will be printing out or logging the traceback; at least the user will be aware that an error has occurred.
+
+2、If the code needs to do some cleanup work, but then lets the exception propagate upwards with raise . try...finally can be a better way to handle this case.
+</blockquote>
+
+* 当对捕获的异常重命名时，使用 2.6 版本引入的语法：
+
 ```python
 try:
     process_data()
@@ -660,9 +679,10 @@ except Exception as exc:
     raise DataProcessingFailedError(str(exc))
 ```
 
-* 当捕获操作系统错误时，使用 Python 3.3 中介绍的异常层次结构
+* 当捕获操作系统错误时，相对于内置的 errno 值，最好是使用 Python 3.3 中介绍的显式异常层次结构
 
-* 对于所有的 try/except 子句，将 try 子句限制为必需的绝对最小代码量避免隐藏错误
+* 对于所有的 try/except 子句，将 try 子句限制为必需的绝对最小代码量避免隐藏 bug：
+
 ```python
 是：
 
@@ -683,9 +703,11 @@ except Exception as exc:
         return key_not_found(key)
 ```
 
-* 特定代码块的本地资源使用 with 语句确保使用后立即释放，try/finally 也可以
+* 特定代码块的本地资源使用 with 语句确保使用后立即释放，不能自动释放的使用 try/finally 也可以。
 
+<blockquote>TODO:</blockquote>
 * 除了申请和释放资源，任何时候都应该使用单独的函数和方法调用 Context managers，例如：
+
 ```python
 是：
 
@@ -698,7 +720,7 @@ except Exception as exc:
         do_stuff_in_transaction(conn) 
 ```
 
-* 返回值要一致，be consistent：
+* 函数返回语句要一致。在一个函数内的所有返回语句要么都返回一个表达式，要么都不返回。如果任何一个返回语句返回了表达式，那么其他任何没有返回值的语句应该明确声明为 return None。并且在函数结束部分必须出现返回语句：
 ```python
 是：
 
@@ -725,25 +747,31 @@ except Exception as exc:
         return math.sqrt(x)
 ```
 
-* 使用 string 方法而不是 string 模块。it's faster。当然，除了 2.0 版本之前 python 代码的向后兼容性
+* 相对于 string 模块，使用 string 方法要快的多并且与 unicode strings 共享相同的 API。当然了，除了需要考虑 2.0 版本之前 python 代码向后兼容性的情况
 
 * 使用 ''.startswith() 和 ''.endswith() 而不是字符串切片来检查前缀或后缀，例如：
+
 ```python
 是： if foo.startswith('bar'):
 否： if foo[:3] == 'bar':
 ```
 
-* 对象类型比较因该使用isinstance() 而不是直接比较，例如：
+* 对象类型比较应该使用isinstance() 而不是直接比较：
+
 ```python
 是： if isinstance(obj, int):
 否： if type(obj) is type(1):
 ```
-在 Python 2 中，string 和 unicode 公共基类是 basestring，因此：
+
+当检查一个对象是否为字符串时，一定要注意这个对象也可能是 unicode 字符串！在 Python 2 中，string 和 unicode 拥有一个公共基类 basestring，因此可以这么的：
+
 ```python
 if isinstance(obj, basestring):
 ```
 
-* 对于序列（字符串，列表，元组），空的序列是 false：
+在 Python 3 中，unicode 和 basestring 已经不复存在了(there's only str)，并且 bytes object 也不再视为一种 string 了，而是一个整形序列
+
+* 对于序列（字符串，列表，元组）的判空操作：
 ```python
 是：
     if not seq:
@@ -756,14 +784,21 @@ if isinstance(obj, basestring):
 
 * 不要使用尾随空格
 
-* 不要使用 == 比较布尔值：
+* 不要使用 == 验证布尔值为 Ture 或 False：
+
 ```python
 是：
     if greeting:
 否：
     if greeting == True:
-糟糕：
+虾扯蛋：
     if greeting is True:
 ```
+
+
+
+
+
+
 
 ## --- 别扯了，再扯蛋都碎了 ---

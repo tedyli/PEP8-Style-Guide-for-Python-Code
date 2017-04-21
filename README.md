@@ -556,13 +556,13 @@ Python 包也应该使用简短的全小写名称，尽管不鼓励使用下划�
 
 类名通常使用驼峰式命名习惯。
 
-在类的接口有文档说明，并且主要用于 callable 的情况下[类都是 callable 的，call 一个类将返回一个新的类实例，例如 instance = Class()。如果类实现了 \_\_call\_\_() 函数，那么类实例也将是 callable 的]，类的命名也可以使用函数命名习惯。
+在类的接口有文档说明，并且主要用于 callable 的情况下，类都是 callable 的，call 一个类将返回一个新的类实例，例如 instance = Class()。如果类实现了 \_\_call\_\_() 函数，那么类实例也将是 callable 的，类的命名也可以使用函数命名习惯。
 
 对于 builtin 函数的命名习惯，可以通过 <code>dir(\_\_builtins\_\_)</code> 查看系统函数命名样例。注意区分普通命名，异常名命名和 builtin 常量。
 
 <h4 id="8.3.4">类型变量名</h4>
 
-相对于短名称如：T , AnyStr , Num，使用驼峰式命名习惯较好，如：
+相对于短名称如：T，AnyStr，Num，类型变量使用驼峰式命名习惯较好。另外建议在变量名前添加 \_co 或 \_contra 前缀响应的声明 covariant 或 contravariant 行为。例如：
 
 ```python
 from typing import TypeVar
@@ -596,7 +596,7 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 
 如果函数入参名和保留关键字冲突，则后缀下划线好过缩写或者糟糕的拼写。
 
-e.g, class_ 好过 clss
+例如，class_ 好过 clss。
 
 <h4 id="8.3.9">方法名和实例变量</h4>
 
@@ -730,7 +730,6 @@ except Exception as exc:
 
 * 特定代码块的本地资源使用 with 语句确保使用后立即释放，不能自动释放的使用 try/finally 也可以。
 
-<blockquote>TODO:</blockquote>
 * 除了申请和释放资源，任何时候都应该使用单独的函数和方法调用 Context managers，例如：
 
 ```python

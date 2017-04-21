@@ -495,7 +495,7 @@ Optional plotz says to frobnicate the bizbaz first.
 """only one single docstring line"""
 ```
 <blockquote>
-Note that most importantly, the """ that ends a multiline docstring should be on a line by itself
+注意当注释为多行时，最终的 """ 单独起一行。
 </blockquote>
 
 <h2 id="8">命名约定</h2>
@@ -542,7 +542,7 @@ Tkinter.Toplevel(master, class_='ClassName')
 
 <h4 id="8.3.1">避免的命名</h4>
 
-一定不要使用 l(唉欧儿) O（偶） I（艾） 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
+一定不要使用 l(唉欧儿) O(偶) I(艾) 作为单字符变量命名，在某些字体中，这些字母和数字 1 0 无法区分。
 
 <h4 id="8.3.2">包和模块名</h4>
 
@@ -550,15 +550,15 @@ Tkinter.Toplevel(master, class_='ClassName')
 
 Python 包也应该使用简短的全小写名称，尽管不鼓励使用下划线。
 
-当 C/C++ 编写的扩展模块伴随一个提供更高级别接口的 python 模块时，C/C++ 模块命名应该以下划线开头（例如，\_socket）
+当 C/C++ 编写的扩展模块伴随一个提供更高级别接口的 python 模块时，C/C++ 模块命名应该以下划线开头(例如，\_socket)。
 
 <h4 id="8.3.3">类名</h4>
 
 类名通常使用驼峰式命名习惯。
 
-The naming convention for functions may be used instead in cases where the interface is documented and used primarily as a callable.
+在类的接口有文档说明，并且主要用于 callable 的情况下[类都是 callable 的，call 一个类将返回一个新的类实例，例如 instance = Class()。如果类实现了 \_\_call\_\_() 函数，那么类实例也将是 callable 的]，类的命名也可以使用函数命名习惯。
 
-对于 builtin 函数的命名习惯，可以通过 <code>dir(\_\_builtins\_\_)</code> 查看，注意区分普通命名，异常名命名和 builtin 常量。
+对于 builtin 函数的命名习惯，可以通过 <code>dir(\_\_builtins\_\_)</code> 查看系统函数命名样例。注意区分普通命名，异常名命名和 builtin 常量。
 
 <h4 id="8.3.4">类型变量名</h4>
 
@@ -573,13 +573,13 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 
 <h4 id="8.3.5">异常名</h4>
 
-异常应该是类，所以可以使用类命名习惯，但是，如果异常是个错误类，一般加上 "Error" 后缀
+异常应该是类，所以可以使用类命名习惯，但是，如果异常是个错误类，一般加上 "Error" 后缀。
 
 <h4 id="8.3.6">全局变量名</h4>
 
 我们假设这些全局变量只在一个模块内使用，这样的话和函数的命名习惯是一样的。
 
-设计为通过 <code>from M import *</code> 导入的类应该使用 \_\_all\_\_ 机制避免导出全局变量，或者可以使用老式的习惯，给这些全局变量名加上下划线作为前缀（表示这是非公有变量）
+设计为通过 <code>from M import *</code> 导入的类应该使用 \_\_all\_\_ 机制避免导出全局变量，或者可以使用老式的习惯，给这些全局变量名加上下划线作为前缀(表示这是非公有变量)。
 
 
 <h4 id="8.3.7">函数名</h4>
@@ -590,11 +590,11 @@ KT_contra = TypeVar('KT_contra', contravariant=True)
 
 <h4 id="8.3.8">函数和方法参数</h4>
 
-实例方法第一个入参一定要是 self
+实例方法第一个入参一定要是 self。
 
-类方法第一个入参一定要是 cls
+类方法第一个入参一定要是 cls。
 
-如果函数入参名和保留关键字冲突，则后缀下划线好过缩写或者糟糕的拼写
+如果函数入参名和保留关键字冲突，则后缀下划线好过缩写或者糟糕的拼写。
 
 e.g, class_ 好过 clss
 
@@ -618,7 +618,7 @@ e.g, class_ 好过 clss
 
 神谕的指导：
 
-* 公有实例变量不应该有前缀下划线
+* 公有实例变量不应该有前缀下划线。
 * 公有实例变量和保留关键字冲突时，变量名加前缀下划线避免，这比使用缩写和其他糟糕的拼写要好（除了 'cls'，当一个变量或入参确定是一个类，特别是作为类方法的第一个入参时，'cls' 更惹人喜爱）。
 * 对于简单的公有数据属性，不要使用复杂的存取函数，直接暴露属性名。
 * 如果设计继承基类时，不希望子类访问的属性加双下划线前缀。
@@ -633,7 +633,7 @@ e.g, class_ 好过 clss
 
 如果包含的任何一个命名空间（package, module or class）是内部的，那么这个接口也被认为是内部接口。
 
-Imported names should always be considered an implementation detail. Other modules must not rely on indirect access to such imported names unless they are an explicitly documented part of the containing module's API, such as os.path or a package's \_\_init\_\_ module that exposes functionality from submodules.
+导入名应该总是被视为实现细节。其他导入模块一定不能依赖对此导入名的间接访问，除非它们是包含模块 API 的显式文档说明的部分，例如 os.path 或者一个 package 向子模块暴露函数的 \_\_init\_\_ 模块。
 
 <h3 id="9">编码建议</h3>
 
@@ -652,14 +652,9 @@ Imported names should always be considered an implementation detail. Other modul
 
     if not foo is None:
 ```
+* 当使用 rich comparisons 实现排序操作时，最好是实现所有六种操作(\_\_eq\_\_,\_\_ne\_\_, \_\_lt\_\_, \_\_le\_\_, \_\_gt\_\_, \_\_ge\_\_)而不要依赖其他的代码去单独实现某一类比较。为了减少劳动，functools.total_ordering() decorator 提供了一个生成缺失比较方法的工具。
 
-* When implementing ordering operations with rich comparisons, it is best to implement all six operations ( \_\_eq\_\_ , \_\_ne\_\_ , \_\_lt\_\_ , \_\_le\_\_ , \_\_gt\_\_ , \_\_ge\_\_ ) rather than relying on other code to only exercise a particular comparison.
-
-To minimize the effort involved, the functools.total_ordering() decorator provides a tool to generate missing comparison methods.
-
-PEP 207 indicates that reflexivity rules are assumed by Python. Thus, the interpreter may swap y > x with x < y , y >= x with x <= y , and may swap the arguments of x == y and x != y . The sort() and min() operations are guaranteed to use the < operator and the max() function uses the > operator. However, it is best to implement all six operations so that confusion doesn't arise in other contexts.
-
-* 使用 def 语句而不用赋值语句直接绑定一个 lambda 表达式到标识符上：
+* 使用 def 语句而不要使用赋值语句去直接绑定一个 lambda 表达式到标识符上：
 
 ```python
 是：
@@ -671,15 +666,15 @@ PEP 207 indicates that reflexivity rules are assumed by Python. Thus, the interp
     f = lambda x: 2*x
 ```
 
-The use of the assignment statement eliminates the sole benefit a lambda expression can offer over an explicit def statement (i.e. that it can be embedded inside a larger expression
+赋值语句的使用消除了 lambda 表达式相对于显式 def 语句的唯一好处，那就是它能够嵌入到一个更大的表达式里面。
 
-* 捕获的异常要说明 "错误出在哪里了 ？" 而不是仅仅说明 "哎呀！出问题了！"
+* 捕获的异常要说明 "错误出在哪里了 ？" 而不是仅仅说明 "哎呀！出问题了！"。
 
 * 正确使用异常链接。在 Python 3 中，应该使用 "raise X from Y" 来表示显式替换并且不会丢失原始追溯。
 
 当有意替换一个内部异常(Python 2: "raise X", Python 3.3+: raise X from Non)时，请确保将相关的详细信息转移到新的异常(例如，将 KeyError 转换为 AttributeError 时保留属性名称，或将原始异常的文本嵌入到新的异常消息中)。
 
-* 当在 Python 2 中抛出异常时，使用 <code>raise ValueError('message')</code> 而不是老式的 <code>raise ValueError, 'message'</code>，后者已经在 Python 3 中废弃。由于使用了括号，可以避免行连续符的使用
+* 当在 Python 2 中抛出异常时，使用 <code>raise ValueError('message')</code> 而不是老式的 <code>raise ValueError, 'message'</code>，后者已经在 Python 3 中废弃。由于使用了括号，可以避免行连续符的使用。
 
 * 当捕获异常时，尽可能提及具体的异常而不是使用一个赤裸裸的 except 子句。一个裸露的 except: 子句将捕获 SystemExit 和 KeyboardInterrupt 异常，这样的话就难于使用 control-c 中断程序，并可能掩盖其他问题。如果想要捕获标志程序错误的所有异常的话，用 except Exception:(裸露的 except 子句等同于 except BaseException:)：
 
@@ -691,11 +686,13 @@ except ImportError:
 ```
 
 <blockquote>
-一个很好的经验法则是将裸露的 except 子句仅用于以下两种情况：
+
+一个很好的经验法则是将裸露的 except 子句仅用于以下两种情况：  
 
 1、If the exception handler will be printing out or logging the traceback; at least the user will be aware that an error has occurred.
 
 2、If the code needs to do some cleanup work, but then lets the exception propagate upwards with raise . try...finally can be a better way to handle this case.
+
 </blockquote>
 
 * 当对捕获的异常重命名时，使用 2.6 版本引入的语法：
@@ -707,7 +704,7 @@ except Exception as exc:
     raise DataProcessingFailedError(str(exc))
 ```
 
-* 当捕获操作系统错误时，相对于内置的 errno 值，最好是使用 Python 3.3 中介绍的显式异常层次结构
+* 当捕获操作系统错误时，相对于内置的 errno 值，最好是使用 Python 3.3 中介绍的显式异常层次结构。
 
 * 对于所有的 try/except 子句，将 try 子句限制为必需的绝对最小代码量避免隐藏 bug：
 
@@ -775,7 +772,7 @@ except Exception as exc:
         return math.sqrt(x)
 ```
 
-* 相对于 string 模块，使用 string 方法要快的多并且与 unicode strings 共享相同的 API。当然了，除了需要考虑 2.0 版本之前 python 代码向后兼容性的情况
+* 相对于 string 模块，使用 string 方法要快的多并且与 unicode strings 共享相同的 API。当然了，除了需要考虑 2.0 版本之前 python 代码向后兼容性的情况。
 
 * 使用 ''.startswith() 和 ''.endswith() 而不是字符串切片来检查前缀或后缀，例如：
 
@@ -797,7 +794,7 @@ except Exception as exc:
 if isinstance(obj, basestring):
 ```
 
-在 Python 3 中，unicode 和 basestring 已然不复存在(there's only str)，并且 bytes object 也不再视为一种 string 了，而是一个整形序列
+在 Python 3 中，unicode 和 basestring 已然不复存在(there's only str)，并且 bytes object 也不再视为一种 string 了，而是一个整形序列。
 
 * 对于序列（字符串，列表，元组）的判空操作：
 ```python
@@ -810,7 +807,7 @@ if isinstance(obj, basestring):
     if not len(seq):
 ```
 
-* 不要使用尾随空格
+* 不要使用尾随空格。
 
 * 不要使用 == 验证布尔值为 Ture 或 False：
 
@@ -823,4 +820,4 @@ if isinstance(obj, basestring):
       if greeting is True:
 ```
 
-## -- 别扯了，再扯蛋都碎了 ---
+## 别扯了，再扯蛋都碎了 。=_=# 

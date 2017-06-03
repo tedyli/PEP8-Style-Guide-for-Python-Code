@@ -1,5 +1,5 @@
 # PEP 8 - Python 代码风格指南
-## 纷吾既有此内美兮，又重之以修能 。 -- 《离骚》屈原
+<blockquote>纷吾既有此内美兮，又重之以修能。 - 屈原《离骚》</blockquote>
 
 * [Introduction - 简介](#1)
 * [A Foolish Consistency is the Hobgoblin of Little Minds - 愚蠢的一致性是小心灵的大地精](#2)
